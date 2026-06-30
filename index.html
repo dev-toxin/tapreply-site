@@ -3,95 +3,691 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapReply — AI Review Manager for Restaurants</title>
+    <meta name="description" content="TapReply is an AI-powered reputation assistant for restaurants and hospitality teams, built to generate brand-safe multilingual review responses in seconds.">
+    <title>TapReply — AI Reputation Assistant for Hospitality</title>
     <style>
+        :root {
+            --bg: #07070A;
+            --surface: rgba(18, 18, 24, 0.78);
+            --surface-strong: #121219;
+            --line: rgba(255, 255, 255, 0.1);
+            --line-soft: rgba(255, 255, 255, 0.06);
+            --text: #FFFFFF;
+            --muted: #A7A7B5;
+            --muted-strong: #D7D7E2;
+            --accent: #FF6B00;
+            --accent-soft: rgba(255, 107, 0, 0.14);
+            --gold: #FFC46B;
+            --green: #63E6BE;
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --shadow: 0 32px 100px rgba(0, 0, 0, 0.5);
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #121214;
-            color: #FFFFFF;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 24px;
-            box-sizing: border-box;
-            text-align: center;
+            background:
+                radial-gradient(circle at 18% 8%, rgba(255, 107, 0, 0.28), transparent 28%),
+                radial-gradient(circle at 82% 18%, rgba(99, 230, 190, 0.12), transparent 26%),
+                linear-gradient(180deg, #0B0B10 0%, var(--bg) 42%, #050507 100%);
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 650px;
-            background-color: #1A1A1E;
-            padding: 48px 32px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            content: "";
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: linear-gradient(to bottom, black, transparent 72%);
         }
-        .icon-box {
-            color: #FF6B00;
-            font-size: 48px;
-            margin-bottom: 16px;
+
+        a {
+            color: inherit;
         }
-        .badge {
-            background-color: rgba(255, 107, 0, 0.1);
-            color: #FF6B00;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-            display: inline-block;
-            border: 1px solid rgba(255, 107, 0, 0.2);
+
+        .page {
+            width: min(100%, var(--max-width));
+            margin: 0 auto;
+            padding: 28px 22px 44px;
         }
-        h1 {
-            font-size: 36px;
-            font-weight: 800;
-            margin: 0 0 16px 0;
-            letter-spacing: -0.5px;
-            line-height: 1.25;
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 72px;
         }
-        p {
-            color: #B8B8C4;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0 0 32px 0;
-        }
-        .btn {
-            background-color: #FF6B00;
-            color: #FFFFFF;
-            padding: 16px 36px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            transition: background-color 0.2s, transform 0.1s;
-            display: inline-block;
-            box-shadow: 0 8px 24px rgba(255, 107, 0, 0.2);
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
+
+        .brand-mark {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            place-items: center;
+            border: 1px solid rgba(255, 107, 0, 0.35);
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), #FF9A3D);
+            box-shadow: 0 12px 28px rgba(255, 107, 0, 0.28);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            padding: 10px 16px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+            gap: 54px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 107, 0, 0.24);
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: #FFD2B0;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--green);
+            box-shadow: 0 0 22px var(--green);
+        }
+
+        h1 {
+            max-width: 780px;
+            margin: 0;
+            font-size: clamp(44px, 7vw, 82px);
+            line-height: 0.94;
+            letter-spacing: -0.07em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #FFFFFF 10%, #FFD2B0 52%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-copy {
+            max-width: 640px;
+            margin: 24px 0 0;
+            color: var(--muted-strong);
+            font-size: clamp(18px, 2vw, 21px);
+            line-height: 1.65;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 34px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 0 22px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #FF9D3D);
+            box-shadow: 0 18px 48px rgba(255, 107, 0, 0.28);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--muted-strong);
+        }
+
         .btn:hover {
-            background-color: #e05e00;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
-        footer {
-            margin-top: 32px;
-            color: #52525B;
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 44px;
+        }
+
+        .metric {
+            padding: 18px;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 24px;
+            letter-spacing: -0.04em;
+        }
+
+        .metric span {
+            display: block;
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .product-card {
+            position: relative;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+        }
+
+        .phone {
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
+            background: #0D0D12;
+        }
+
+        .phone-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .status-pill {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(99, 230, 190, 0.12);
+            color: #BAF8E8;
             font-size: 12px;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+        }
+
+        .review {
+            margin: 18px;
+            padding: 18px;
+            border: 1px solid var(--line-soft);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .stars {
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .review p,
+        .reply p {
+            margin: 12px 0 0;
+            color: var(--muted-strong);
+            line-height: 1.55;
+        }
+
+        .reply {
+            margin: 18px;
+            padding: 18px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255, 107, 0, 0.16), rgba(255, 255, 255, 0.055));
+            border: 1px solid rgba(255, 107, 0, 0.24);
+        }
+
+        .reply-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: #FFD2B0;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .floating-chip {
+            position: absolute;
+            right: -18px;
+            bottom: 42px;
+            max-width: 210px;
+            padding: 14px 16px;
+            border: 1px solid rgba(99, 230, 190, 0.22);
+            border-radius: 18px;
+            background: rgba(10, 18, 17, 0.9);
+            color: #D7FFF4;
+            font-size: 13px;
+            line-height: 1.45;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .section {
+            margin-top: 94px;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 10px 0 0;
+            font-size: clamp(32px, 4.2vw, 52px);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature {
+            min-height: 230px;
+            padding: 24px;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+        }
+
+        .feature-icon {
+            display: grid;
+            width: 44px;
+            height: 44px;
+            margin-bottom: 24px;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--accent-soft);
+            color: var(--gold);
+            font-weight: 900;
+        }
+
+        .feature h3 {
+            margin: 0;
+            font-size: 19px;
+            letter-spacing: -0.025em;
+        }
+
+        .feature p {
+            margin: 12px 0 0;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .trust-panel {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 16px;
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035));
+        }
+
+        .trust-card {
+            padding: 26px;
+            border: 1px solid var(--line-soft);
+            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.16);
+        }
+
+        .trust-card ul {
+            display: grid;
+            gap: 12px;
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+            color: var(--muted-strong);
+        }
+
+        .trust-card li::before {
+            margin-right: 10px;
+            color: var(--green);
+            content: "✓";
+        }
+
+        .signal-card {
+            display: grid;
+            gap: 18px;
+            padding: 26px;
+            border: 1px solid var(--line-soft);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 90% 12%, rgba(99, 230, 190, 0.12), transparent 30%),
+                rgba(0, 0, 0, 0.16);
+        }
+
+        .signal-row {
+            display: grid;
+            gap: 8px;
+        }
+
+        .signal-label {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted-strong);
+            font-size: 14px;
+            font-weight: 750;
+        }
+
+        .signal-track {
+            height: 10px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .signal-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+        }
+
+        .signal-fill.product {
+            width: 86%;
+        }
+
+        .signal-fill.market {
+            width: 78%;
+        }
+
+        .signal-fill.trust {
+            width: 72%;
+        }
+
+        .signal-note {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .cta {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: center;
+            padding: 34px;
+            border: 1px solid rgba(255, 107, 0, 0.24);
+            border-radius: var(--radius-xl);
+            background:
+                radial-gradient(circle at 90% 20%, rgba(255, 196, 107, 0.16), transparent 34%),
+                linear-gradient(145deg, rgba(255, 107, 0, 0.16), rgba(255, 255, 255, 0.045));
+            box-shadow: var(--shadow);
+        }
+
+        .cta h2 {
+            max-width: 720px;
+        }
+
+        .cta p {
+            max-width: 680px;
+            margin: 14px 0 0;
+            color: var(--muted-strong);
+            line-height: 1.6;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 44px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line-soft);
+            color: #6E6E7B;
+            font-size: 13px;
+        }
+
+        @media (max-width: 920px) {
+            .nav {
+                margin-bottom: 44px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .trust-panel,
+            .cta {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-3,
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-chip {
+                right: 18px;
+                bottom: 18px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .page {
+                padding: 20px 14px 32px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .product-card,
+            .cta {
+                border-radius: 24px;
+            }
+
+            .floating-chip {
+                position: static;
+                max-width: none;
+                margin: 14px 18px 18px;
+            }
+
+            footer {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="icon-box">✦</div>
-        <div class="badge">Coming Soon to App Store</div>
-        <h1>The Smartest Way to Manage Local Reputation</h1>
-        <p>TapReply helps restaurant and hospitality owners in Spain automate review responses with hyper-localized AI. Save hours of work and build lasting customer loyalty directly from your smartphone.</p>
-        <a href="mailto:ceo@ankosoftlab.com" class="btn">Get Early Access</a>
-        <footer>
-            &copy; 2026 AnKo Software Labs LLC. All rights reserved. | Privacy Policy
-        </footer>
-    </div>
+<main class="page">
+    <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="TapReply home">
+            <span class="brand-mark">✦</span>
+            <span>TapReply</span>
+        </a>
+        <div class="nav-links">
+            <a href="#platform">Platform</a>
+            <a href="#trust">Trust</a>
+            <a class="nav-cta" href="mailto:ceo@ankosoftlab.com">Early Access</a>
+        </div>
+    </nav>
+
+    <section id="top" class="hero">
+        <div>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> AI Review Manager for Hospitality</div>
+            <h1>Reputation operations, <span class="gradient-text">rebuilt for local businesses.</span></h1>
+            <p class="hero-copy">TapReply helps restaurants, cafés, hotels and service teams answer customer reviews with fast, multilingual, brand-safe AI — designed for owners who run the business from their phone.</p>
+            <div class="actions">
+                <a href="mailto:ceo@ankosoftlab.com?subject=TapReply%20Early%20Access" class="btn btn-primary">Request early access</a>
+                <a href="mailto:ceo@ankosoftlab.com?subject=TapReply%20Product%20Demo" class="btn btn-secondary">See product demo</a>
+            </div>
+            <div class="metrics" aria-label="TapReply positioning metrics">
+                <div class="metric"><strong>&lt;45 sec</strong><span>AI response workflow tuned for real hospitality operations</span></div>
+                <div class="metric"><strong>ES / EN</strong><span>Localized tone for tourist-heavy European markets</span></div>
+                <div class="metric"><strong>Mobile-first</strong><span>Built for owner-operators, not enterprise dashboards</span></div>
+            </div>
+        </div>
+
+        <aside class="product-card" aria-label="Product preview">
+            <div class="phone">
+                <div class="phone-top">
+                    <strong>TapReply Studio</strong>
+                    <span class="status-pill">Ready to publish</span>
+                </div>
+                <div class="review">
+                    <div class="stars">★★★★★</div>
+                    <p>“Great seafood and warm staff. The terrace was busy, but the manager handled everything with care.”</p>
+                </div>
+                <div class="reply">
+                    <div class="reply-header">
+                        <span>AI brand reply</span>
+                        <span>Spanish tone</span>
+                    </div>
+                    <p>¡Muchas gracias por visitarnos! Nos alegra saber que disfrutaste del marisco y del ambiente en la terraza. Compartiremos tus palabras con el equipo.</p>
+                </div>
+            </div>
+            <div class="floating-chip">Designed to protect tone, reduce response time and increase review coverage without adding headcount.</div>
+        </aside>
+    </section>
+
+    <section id="platform" class="section">
+        <div class="section-header">
+            <div class="section-kicker">Premium operating layer</div>
+            <h2>One focused workflow for every review that deserves a reply.</h2>
+        </div>
+        <div class="grid-3">
+            <article class="feature">
+                <div class="feature-icon">01</div>
+                <h3>Localized AI replies</h3>
+                <p>Generate responses that sound natural in the market, adapt to rating sentiment and keep hospitality warmth intact.</p>
+            </article>
+            <article class="feature">
+                <div class="feature-icon">02</div>
+                <h3>Owner-grade speed</h3>
+                <p>Simple mobile-first flow: paste, generate, approve, share. No complex CRM onboarding or dashboard training.</p>
+            </article>
+            <article class="feature">
+                <div class="feature-icon">03</div>
+                <h3>Brand-safe control</h3>
+                <p>Every reply stays review-specific, polite and publish-ready, giving operators final approval before anything goes live.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="trust" class="section trust-panel">
+        <div class="trust-card">
+            <div class="section-kicker">Market ready</div>
+            <h2>A real product experience for real hospitality workflows.</h2>
+            <ul>
+                <li>Focused on restaurants, cafés, hotels and local service teams.</li>
+                <li>Designed for high-review platforms where response speed matters.</li>
+                <li>Built for multilingual tourist markets, starting with Spain.</li>
+            </ul>
+        </div>
+        <div class="signal-card" aria-label="Product readiness signals">
+            <div class="signal-row">
+                <div class="signal-label"><span>Product workflow</span><span>Live prototype</span></div>
+                <div class="signal-track"><div class="signal-fill product"></div></div>
+                <p class="signal-note">Mobile-first flow from review input to approved AI reply.</p>
+            </div>
+            <div class="signal-row">
+                <div class="signal-label"><span>Market fit</span><span>Hospitality niche</span></div>
+                <div class="signal-track"><div class="signal-fill market"></div></div>
+                <p class="signal-note">Positioned around repeatable review management pain for owner-operators.</p>
+            </div>
+            <div class="signal-row">
+                <div class="signal-label"><span>Trust controls</span><span>Human approval</span></div>
+                <div class="signal-track"><div class="signal-fill trust"></div></div>
+                <p class="signal-note">Replies are generated by AI, but publishing remains controlled by the business.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta">
+        <div>
+            <div class="section-kicker">Early access</div>
+            <h2>AI reputation replies for hospitality teams who cannot afford to ignore reviews.</h2>
+            <p>TapReply is preparing pilot access for local businesses that want faster, warmer and more consistent customer communication.</p>
+        </div>
+        <a href="mailto:ceo@ankosoftlab.com?subject=TapReply%20Early%20Access" class="btn btn-primary">Contact founder</a>
+    </section>
+
+    <footer>
+        <span>&copy; 2026 AnKo Software Labs LLC. All rights reserved.</span>
+        <span>TapReply — AI Reputation Assistant</span>
+    </footer>
+</main>
 </body>
 </html>
