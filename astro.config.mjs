@@ -49,6 +49,9 @@ export default defineConfig({
     build: {
       // Never inline assets/scripts as data: or inline <script> (CSP).
       assetsInlineLimit: 0,
+      // One small shared stylesheet (~30 KB) instead of many per-component files:
+      // fewer render-blocking requests, cached across all pages.
+      cssCodeSplit: false,
     },
   },
 });
