@@ -1,0 +1,104 @@
+---
+/** Static, readable 4-block Tourist Shield example (no JS). */
+import { t, type Lang } from '../i18n/utils';
+import Badge from './Badge.astro';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const d = t(lang);
+const s = d.shield;
+---
+
+<div class="demo">
+  <div class="demo__meta">
+    <Badge>{d.common.example}</Badge>
+    <span>{s.venue} · {s.venueNote}</span>
+  </div>
+  <ol class="demo__grid">
+    {
+      s.steps.map((step, i) => (
+        <li class:list={['demo__block', { 'demo__block--reply': step.key === 'reply' }]}>
+          <div class="demo__head">
+            <span class="demo__num">{i + 1}</span>
+            <h3>{step.label}</h3>
+            <span class="demo__lang">{step.lang}</span>
+          </div>
+          <p lang={step.key === 'original' || step.key === 'reply' ? 'de' : lang}>{step.text}</p>
+          {step.key === 'reply' && <p class="demo__hint">{s.youConfirm}</p>}
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .demo__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .demo__grid {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+  @media (min-width: 860px) {
+    .demo__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .demo__block {
+    padding: clamp(20px, 2.4vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .demo__block--reply {
+    border-color: rgba(255, 107, 0, 0.35);
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.08), transparent 70%), var(--card);
+    box-shadow: var(--glow);
+  }
+  .demo__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .demo__num {
+    display: grid;
+    flex: none;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--accent-tint);
+    color: var(--accent-text);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+  }
+  .demo__head h3 {
+    font-size: 1rem;
+  }
+  .demo__lang {
+    margin-left: auto;
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+  }
+  .demo__block p {
+    color: #e6e6ec;
+  }
+  .demo__hint {
+    margin-top: 14px;
+    color: var(--accent-text) !important;
+    font-size: var(--fs-sm);
+  }
+</style>

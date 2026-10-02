@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import Badge from '../../components/Badge.astro';
+import Card from '../../components/Card.astro';
+import Section from '../../components/Section.astro';
+import PhoneMockup from '../../components/PhoneMockup.astro';
+import Platforms from '../../components/Platforms.astro';
+import ShieldDemo from '../../components/ShieldDemo.astro';
+import PlanCards from '../../components/PlanCards.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import Icon from '../../components/Icon.astro';
+import { href, langPaths, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const h = d.pages.home;
+const stepIcons = ['link', 'translate', 'send'];
+---
+
+<BaseLayout lang={lang} page="" title={h.title} description={h.description}>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <Badge variant="accent"><span class="pulse" aria-hidden="true"></span>{d.common.earlyAccess}</Badge>
+        <h1 id="hero-title">{h.hero.h1}</h1>
+        <p class="lead hero__sub">{h.hero.sub}</p>
+        <div class="hero__actions">
+          <Button href={href(lang, 'pilot')} size="lg" arrow>{d.common.ctaPilot}</Button>
+          <Button href={href(lang, '', 'how')} size="lg" variant="secondary">{d.common.ctaHow}</Button>
+        </div>
+        <p class="hero__note">
+          <Icon name="lock" size={18} />
+          {h.hero.note}
+        </p>
+      </div>
+      <div class="hero__visual">
+        <PhoneMockup lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORMS -->
+  <Section id="platforms" kicker={h.platforms.kicker} title={h.platforms.title} sub={h.platforms.sub} tone="deep">
+    <Platforms lang={lang} />
+    <p class="more"><Button href={href(lang, 'how-it-works')} variant="ghost" arrow>{h.platforms.more}</Button></p>
+  </Section>
+
+  <!-- HOW -->
+  <Section id="how" kicker={h.how.kicker} title={h.how.title}>
+    <ol class="how grid grid--3">
+      {
+        h.how.steps.map((s, i) => (
+          <li class="how__step">
+            <Card as="div" icon={stepIcons[i]} title={s.title} text={s.text}>
+              <span class="how__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            </Card>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <!-- SHIELD DEMO -->
+  <Section id="shield" kicker={h.shield.kicker} title={h.shield.title} sub={h.shield.sub} tone="deep">
+    <ShieldDemo lang={lang} />
+  </Section>
+
+  <!-- WHY -->
+  <Section id="why" kicker={h.why.kicker} title={h.why.title}>
+    <div class="grid grid--3">
+      {h.why.items.map((it) => <Card icon={it.icon} title={it.title} text={it.text} />)}
+    </div>
+  </Section>
+
+  <!-- SECURITY (the single light contrast section) -->
+  <Section id="security" kicker={h.security.kicker} title={h.security.title} sub={h.security.text} tone="light">
+    <ul class="sec">
+      {
+        h.security.points.map((p) => (
+          <li>
+            <span class="sec__icon">
+              <Icon name="check" size={22} />
+            </span>
+            {p}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <!-- PRICING -->
+  <Section id="pricing" kicker={h.pricing.kicker} title={h.pricing.title} sub={h.pricing.sub}>
+    <PlanCards lang={lang} compact />
+    <p class="more"><Button href={href(lang, 'pricing')} variant="ghost" arrow>{h.pricing.more}</Button></p>
+  </Section>
+
+  <!-- FAQ -->
+  <Section id="faq" kicker={h.faq.kicker} title={h.faq.title} tone="deep">
+    <div class="faq-wrap">
+      <Faq items={d.pages.faq.items.slice(0, 5)} />
+      <p class="more"><Button href={href(lang, 'faq')} variant="ghost" arrow>{h.faq.more}</Button></p>
+    </div>
+  </Section>
+
+  <div class="spacer" aria-hidden="true"></div>
+  <Cta lang={lang} title={h.cta.title} text={h.cta.text} />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(48px, 7vw, 96px) clamp(64px, 9vw, 120px);
+    overflow: hidden;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(40% 55% at 78% 45%, rgba(255, 107, 0, 0.12), transparent 70%),
+      linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+    pointer-events: none;
+  }
+  .hero__grid {
+    position: relative;
+    display: grid;
+    gap: clamp(48px, 6vw, 72px);
+    align-items: center;
+  }
+  .hero__copy h1 {
+    margin-top: 22px;
+    max-width: 14ch;
+  }
+  .hero__sub {
+    max-width: 56ch;
+    margin-top: 22px;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+  .hero__note {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 22px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .hero__note :global(svg) {
+    flex: none;
+    color: var(--accent-text);
+  }
+  .pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  @media (min-width: 960px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+  }
+
+  .more {
+    margin-top: 28px;
+  }
+
+  .how {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .how__step {
+    display: flex;
+  }
+  .how__step > :global(.card) {
+    flex: 1;
+  }
+  .how__num {
+    position: absolute;
+    top: 26px;
+    right: 28px;
+    color: var(--text-3);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sec {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .sec li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 20px 22px;
+    border: 1px solid rgba(24, 24, 27, 0.08);
+    border-radius: var(--r-md);
+    background: var(--light-card);
+    color: var(--light-text);
+    font-weight: 500;
+  }
+  .sec__icon {
+    flex: none;
+    color: var(--light-accent-text);
+  }
+  @media (min-width: 720px) {
+    .sec {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .faq-wrap {
+    max-width: 860px;
+  }
+  .spacer {
+    height: var(--section-y);
+  }
+</style>

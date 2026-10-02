@@ -1,0 +1,136 @@
+---
+import { href, t, CONTACT_EMAIL, STUDIO_URL, type Lang } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<footer class="ftr">
+  <div class="container">
+    <div class="ftr__grid">
+      <div class="ftr__brand">
+        <a class="ftr__logo" href={href(lang)} aria-label={d.common.homeLabel}>
+          <img src="/brand/logo-96.webp" width="36" height="36" alt="" loading="lazy" decoding="async" />
+          <span>TapReply</span>
+        </a>
+        <p>{d.footer.tagline}</p>
+        <a class="ftr__mail" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </div>
+
+      <nav aria-labelledby="ftr-product">
+        <h2 id="ftr-product">{d.footer.product}</h2>
+        <ul>
+          <li><a href={href(lang, 'features')}>{d.nav.features}</a></li>
+          <li><a href={href(lang, 'how-it-works')}>{d.nav.how}</a></li>
+          <li><a href={href(lang, 'pricing')}>{d.nav.pricing}</a></li>
+          <li><a href={href(lang, 'pilot')}>{d.nav.pilot}</a></li>
+          <li><a href={href(lang, 'faq')}>{d.nav.faq}</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="ftr-company">
+        <h2 id="ftr-company">{d.footer.company}</h2>
+        <ul>
+          <li><a href={href(lang, 'about')}>{d.nav.about}</a></li>
+          <li><a href={STUDIO_URL} rel="noopener">{d.footer.studio}</a></li>
+          <li><a href={`mailto:${CONTACT_EMAIL}`}>{d.footer.contact}</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="ftr-legal">
+        <h2 id="ftr-legal">{d.footer.legal}</h2>
+        <ul>
+          <li><a href={href(lang, 'privacy')}>{d.footer.privacy}</a></li>
+          <li><a href={href(lang, 'terms')}>{d.footer.terms}</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="ftr__bottom">
+      <span>{d.footer.rights}</span>
+      <span>{d.common.earlyAccess}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    padding-block: 64px 32px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-deep);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .ftr__grid {
+    display: grid;
+    gap: 36px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ftr__brand {
+    grid-column: 1 / -1;
+    max-width: 360px;
+  }
+  .ftr__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    color: var(--text);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .ftr__logo img {
+    border-radius: 10px;
+  }
+  .ftr__mail {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent-text);
+  }
+  h2 {
+    margin-bottom: 14px;
+    color: var(--text);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul a {
+    display: inline-block;
+    padding-block: 4px;
+    text-decoration: none;
+  }
+  ul a:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+  .ftr__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: var(--fs-xs);
+  }
+  @media (min-width: 860px) {
+    .ftr__grid {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+    .ftr__brand {
+      grid-column: auto;
+    }
+  }
+</style>

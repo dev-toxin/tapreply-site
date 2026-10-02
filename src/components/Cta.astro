@@ -1,0 +1,74 @@
+---
+import Button from './Button.astro';
+import { href, mailto, t, type Lang } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+  title: string;
+  text?: string;
+}
+const { lang, title, text } = Astro.props;
+const d = t(lang);
+---
+
+<section class="cta-wrap" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="cta">
+      <div class="cta__glow" aria-hidden="true"></div>
+      <div class="cta__body">
+        <span class="kicker">{d.common.earlyAccess}</span>
+        <h2 id="cta-title">{title}</h2>
+        {text && <p>{text}</p>}
+      </div>
+      <div class="cta__actions">
+        <Button href={href(lang, 'pilot')} size="lg" arrow>{d.common.ctaPilot}</Button>
+        <Button href={mailto('TapReply')} size="lg" variant="secondary">{d.pages.home.cta.secondary}</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-wrap {
+    padding-block: 0 var(--section-y);
+  }
+  .cta {
+    position: relative;
+    display: grid;
+    gap: 28px;
+    padding: clamp(28px, 5vw, 56px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 107, 0, 0.22);
+    border-radius: var(--r-xl);
+    background: var(--card);
+  }
+  .cta__glow {
+    position: absolute;
+    right: -10%;
+    top: -60%;
+    width: 70%;
+    height: 200%;
+    background: radial-gradient(closest-side, rgba(255, 107, 0, 0.16), transparent);
+    pointer-events: none;
+  }
+  .cta__body {
+    position: relative;
+    max-width: 640px;
+  }
+  .cta__body p {
+    margin-top: 14px;
+    color: var(--text-2);
+    font-size: var(--fs-lead);
+  }
+  .cta__actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  @media (min-width: 960px) {
+    .cta {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+</style>

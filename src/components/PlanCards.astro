@@ -1,0 +1,115 @@
+---
+import Button from './Button.astro';
+import { href, mailto, t, type Lang } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+  compact?: boolean;
+}
+const { lang, compact = false } = Astro.props;
+const d = t(lang);
+const plans = d.pages.pricing.plans;
+const ctaHref = (i: number) => (i <= 1 ? href(lang, 'pilot') : mailto(`TapReply — ${plans[i].name}`));
+---
+
+<div class="plans">
+  {
+    plans.map((p, i) => (
+      <article class:list={['plan', { 'plan--hl': p.highlight }]}>
+        <h3 class="plan__name">{p.name}</h3>
+        <p class="plan__price">
+          <span>{p.price}</span>
+          {p.period && <small>{p.period}</small>}
+        </p>
+        <p class="plan__desc">{p.desc}</p>
+        {!compact && (
+          <ul class="check-list plan__list">
+            {p.features.map((f) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+        )}
+        <div class="plan__cta">
+          <Button href={ctaHref(i)} variant={p.highlight ? 'primary' : 'secondary'}>
+            {p.cta}
+          </Button>
+        </div>
+      </article>
+    ))
+  }
+</div>
+<p class="note">{d.common.pricesNote}</p>
+
+<style>
+  .plans {
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .plans {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1120px) {
+    .plans {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .plan {
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .plan--hl {
+    border-color: rgba(255, 107, 0, 0.4);
+    box-shadow: var(--glow);
+  }
+  .plan__name {
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .plan--hl .plan__name {
+    color: var(--accent-text);
+  }
+  .plan__price {
+    margin-top: 12px;
+  }
+  .plan__price span {
+    display: block;
+    font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .plan__price small {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+  }
+  .plan__desc {
+    margin-top: 12px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .plan__list {
+    margin-top: 20px;
+    font-size: var(--fs-sm);
+  }
+  .plan__cta {
+    margin-top: auto;
+    padding-top: 24px;
+  }
+  .plan__cta :global(.btn) {
+    width: 100%;
+  }
+  .note {
+    margin-top: 18px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+</style>

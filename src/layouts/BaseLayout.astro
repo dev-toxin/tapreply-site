@@ -1,0 +1,138 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { LANGS, DEFAULT_LANG, href, t, CONTACT_EMAIL, STUDIO_URL, type Lang, type PageKey } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  page: PageKey | '404';
+  title: string;
+  description: string;
+  /** Extra JSON-LD objects for this page (e.g. FAQPage). */
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const { lang, page, title, description, jsonLd = [], noindex = false } = Astro.props;
+const d = t(lang);
+const site = Astro.site!;
+const isRealPage = page !== '404';
+const abs = (p: string) => new URL(p, site).href;
+const canonical = isRealPage ? abs(href(lang, page as PageKey)) : undefined;
+const ogImage = abs('/og-image.png');
+
+const org = {
+  '@type': 'Organization',
+  '@id': abs('/#organization'),
+  name: 'AnKo Software Labs',
+  url: STUDIO_URL,
+  email: CONTACT_EMAIL,
+  logo: abs('/brand/logo-512.png'),
+  address: { '@type': 'PostalAddress', addressCountry: 'GE' },
+};
+
+const graph: Record<string, unknown>[] = [org];
+if (page === '') {
+  graph.push(
+    {
+      '@type': 'WebSite',
+      '@id': abs('/#website'),
+      url: abs('/'),
+      name: 'TapReply',
+      inLanguage: LANGS,
+      publisher: { '@id': abs('/#organization') },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'TapReply',
+      url: abs(href(lang)),
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web, iOS, Android (PWA)',
+      description,
+      inLanguage: lang,
+      publisher: { '@id': abs('/#organization') },
+      offers: [
+        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' },
+        {
+          '@type': 'Offer',
+          name: 'Pilot / Individual',
+          priceCurrency: 'USD',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            minPrice: '19',
+            maxPrice: '29',
+            priceCurrency: 'USD',
+            unitText: 'venue per month',
+          },
+        },
+      ],
+    },
+  );
+}
+graph.push(...jsonLd);
+const ld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<html lang={d.htmlLang} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {
+      isRealPage &&
+        LANGS.map((l) => <link rel="alternate" hreflang={l} href={abs(href(l, page as PageKey))} />)
+    }
+    {isRealPage && <link rel="alternate" hreflang="x-default" href={abs(href(DEFAULT_LANG, page as PageKey))} />}
+
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {lang === 'ru' && <link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin />}
+
+    <meta name="theme-color" content="#121214" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TapReply" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TapReply — Reply to every review in your guest's language" />
+    <meta property="og:locale" content={d.ogLocale} />
+    {LANGS.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={t(l).ogLocale} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={ld} />
+
+    {/*
+      Analytics placeholder (disabled, not rendered). To enable Cloudflare Web Analytics later:
+      add the CF beacon script (token from the CF dashboard) here and allow
+      https://static.cloudflareinsights.com in script-src/connect-src of public/_headers CSP.
+      See docs/DECISIONS.md.
+    */}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{d.common.skip}</a>
+    <Header lang={lang} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
