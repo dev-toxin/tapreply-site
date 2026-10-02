@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from './PageHead.astro';
+import Card from './Card.astro';
+import Platforms from './Platforms.astro';
+import Cta from './Cta.astro';
+import Button from './Button.astro';
+import { href, t, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  segment: 'restaurants' | 'hotels';
+}
+const { lang, segment } = Astro.props;
+const d = t(lang);
+const s = d.pages.segments[segment];
+const painIcons = ['globe', 'inbox', 'chat'];
+const howIcons = ['inbox', 'shield', 'check'];
+const other = segment === 'restaurants' ? 'hotels' : 'restaurants';
+const otherLabel = segment === 'restaurants' ? d.common.forHotels : d.common.forRestaurants;
+---
+
+<BaseLayout lang={lang} page={`for/${segment}`} title={s.title} description={s.description}>
+  <PageHead kicker={s.kicker} title={s.h1} lead={s.lead}>
+    <div class="seg-actions">
+      <Button href={href(lang, 'pilot')} size="lg" arrow>{d.common.ctaPilot}</Button>
+      <Button href={href(lang, 'how-it-works')} size="lg" variant="secondary">{d.common.ctaHow}</Button>
+    </div>
+  </PageHead>
+
+  <div class="container seg">
+    <ul class="grid grid--3 seg__grid" aria-label={s.kicker}>
+      {
+        s.pains.map((p, i) => (
+          <li class="seg__item">
+            <Card as="div" icon={painIcons[i]} title={p.title} text={p.text} headingLevel="h2" />
+          </li>
+        ))
+      }
+    </ul>
+
+    <ol class="grid grid--3 seg__grid seg__how">
+      {
+        s.how.map((p, i) => (
+          <li class="seg__item">
+            <Card as="div" icon={howIcons[i]} title={p.title} text={p.text} headingLevel="h2" class="seg__card--how" />
+          </li>
+        ))
+      }
+    </ol>
+
+    <section class="seg__platforms" aria-labelledby="seg-platforms-h">
+      <h2 id="seg-platforms-h">{d.pages.home.platforms.title}</h2>
+      <p class="seg__example">{s.example.platform}</p>
+      <Platforms lang={lang} />
+      <p class="seg__note">{s.example.note}</p>
+      <p class="seg__other">
+        <Button href={href(lang, `for/${other}`)} variant="ghost" arrow>{otherLabel}</Button>
+      </p>
+    </section>
+  </div>
+
+  <Cta lang={lang} title={s.ctaTitle} text={s.ctaText} />
+</BaseLayout>
+
+<style>
+  .seg-actions {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .seg {
+    padding-bottom: var(--section-y);
+  }
+  .seg__grid {
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+  }
+  .seg__item {
+    display: flex;
+  }
+  .seg__item > :global(.card) {
+    flex: 1;
+  }
+  .seg__how {
+    margin-bottom: clamp(48px, 7vw, 88px);
+  }
+  .seg__how :global(.seg__card--how) {
+    border-color: rgba(255, 107, 0, 0.22);
+  }
+  .seg__platforms h2 {
+    font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  }
+  .seg__example {
+    margin: 12px 0 24px;
+    color: var(--text-2);
+    font-size: var(--fs-lead);
+  }
+  .seg__note {
+    max-width: 70ch;
+    margin-top: 16px;
+    padding: 16px 18px;
+    border-left: 2px solid var(--accent);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    background: var(--card);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .seg__other {
+    margin-top: 24px;
+  }
+</style>

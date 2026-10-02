@@ -23,6 +23,8 @@ export const en = {
     pricesNote: 'Early-access pricing — prices may change.',
     emailUs: 'Email us',
     onThisPage: 'On this page',
+    forRestaurants: 'For restaurants & cafés',
+    forHotels: 'For guest houses & hotels',
   },
 
   nav: {
@@ -237,7 +239,7 @@ export const en = {
       security: {
         kicker: 'Security & privacy',
         title: 'Built so you never hand over the keys.',
-        text: 'Other tools ask for your platform passwords. TapReply doesn’t — by design.',
+        text: 'Your review platforms stay under your own logins. TapReply never asks for them — by design.',
         points: [
           'No passwords or logins to Google, Yandex, Booking or other platforms.',
           'Only review texts and your replies are processed — no guest payment data.',
@@ -255,6 +257,20 @@ export const en = {
         kicker: 'FAQ',
         title: 'Short answers.',
         more: 'All questions',
+      },
+      compare: {
+        kicker: 'Compared honestly',
+        title: 'TapReply vs. the built-in AI reply in Google',
+        sub: 'Google Business Profile can suggest replies too. It is a good option if Google is your only platform.',
+        cols: ['', 'Google’s built-in suggestions', 'TapReply'],
+        rows: [
+          ['Platforms', 'Google only', 'Google, Yandex Maps, 2GIS, Tripadvisor, Booking.com, TheFork, Facebook and more'],
+          ['Translation of the review for you', 'Yes, machine translation', 'Yes, into your language, next to the original'],
+          ['Translation of your reply back to you', 'Not as a separate step', 'Yes — you know exactly what you publish'],
+          ['One feed for all reviews', 'No', 'Yes'],
+          ['Price', 'Free', 'Free plan + paid plans per venue'],
+        ],
+        note: 'Based on publicly available information as of October 2026; Google’s features may change.',
       },
       cta: {
         title: 'Looking for 3–10 pilot venues.',
@@ -671,6 +687,93 @@ export const en = {
           p: ['Questions about these terms: ceo@ankosoftlab.com.'],
         },
       ],
+    },
+
+    segments: {
+      restaurants: {
+        title: 'TapReply for restaurants, cafés and bars',
+        description:
+          'Answer tourist reviews on Google, Yandex Maps, 2GIS, Tripadvisor and TheFork in the guest’s language — from your phone, between orders. Early access.',
+        kicker: 'For restaurants, cafés & bars',
+        h1: 'Answer every guest — between two orders.',
+        lead: 'Tourists review you in German, Hebrew or Korean on five different platforms. TapReply puts them in one feed and drafts a reply in the guest’s language in seconds — you just check and send.',
+        pains: [
+          {
+            title: 'Reviews in languages you don’t read',
+            text: 'A guest from abroad writes a detailed review — and you can’t be sure what they liked or what went wrong.',
+          },
+          {
+            title: 'Too many platforms',
+            text: 'Google, Yandex Maps, 2GIS, Tripadvisor, TheFork — each with its own app and its own notifications.',
+          },
+          {
+            title: 'No time during service',
+            text: 'Replies get postponed until “later”, and later never comes. Unanswered negative reviews stay at the top.',
+          },
+        ],
+        how: [
+          {
+            title: 'One feed for the floor',
+            text: 'New and negative reviews from every platform in one list on your phone. Google via the official API is in preparation; others via notification e-mails or paste.',
+          },
+          {
+            title: 'Tourist Shield',
+            text: 'The review translated for you, a reply in the guest’s language, and a translation of that reply — so you know exactly what you publish.',
+          },
+          {
+            title: 'Ten seconds, one thumb',
+            text: 'The draft mentions the dish or the waiter the guest wrote about. You approve, copy and paste — nothing goes out without you.',
+          },
+        ],
+        example: {
+          platform: 'Typical mix for a city-centre café: Google, Yandex Maps, 2GIS, Tripadvisor.',
+          note: 'On Yandex Maps the reply is drafted in Russian, as the platform expects — with a translation for you if needed.',
+        },
+        ctaTitle: 'Run a café, restaurant or bar with guests from abroad?',
+        ctaText: 'Join the pilot — we will set up your platforms and your venue’s tone together.',
+      },
+      hotels: {
+        title: 'TapReply for guest houses and small hotels',
+        description:
+          'Reply to long Booking.com, Tripadvisor and Google reviews from guests of many countries — in their language, with a translation for you. No passwords.',
+        kicker: 'For guest houses & small hotels',
+        h1: 'Long reviews, many languages — one calm reply.',
+        lead: 'Your guests come from everywhere and write detailed reviews about the room, the breakfast and the host. TapReply helps you answer each one personally, in their language, without spending your evening on it.',
+        pains: [
+          {
+            title: 'Long, detailed reviews',
+            text: 'Guests write paragraphs about check-in, cleanliness and breakfast. A good reply has to address the specifics.',
+          },
+          {
+            title: 'Guests from many countries',
+            text: 'German, French, Hebrew, Polish, Chinese — machine translation alone doesn’t tell you whether your reply sounds right.',
+          },
+          {
+            title: 'Reviews influence bookings',
+            text: 'Future guests read how the host responds, especially to criticism. Silence or a template reply costs trust.',
+          },
+        ],
+        how: [
+          {
+            title: 'Booking, Tripadvisor, Google in one place',
+            text: 'Forward notification e-mails or paste the review. Google via the official API is in preparation. We never ask for your extranet password.',
+          },
+          {
+            title: 'A personal reply, point by point',
+            text: 'The draft thanks for what the guest liked and calmly addresses each complaint — in your tone, in the guest’s language.',
+          },
+          {
+            title: 'You stay in control',
+            text: 'Read the translation of your reply, adjust a detail, then paste it into the extranet yourself. AI only drafts.',
+          },
+        ],
+        example: {
+          platform: 'Typical mix for a guest house: Booking.com, Tripadvisor, Google.',
+          note: 'Booking.com and Tripadvisor reviews come in via notification e-mails or paste; you publish the reply in their business accounts.',
+        },
+        ctaTitle: 'Host guests from many countries?',
+        ctaText: 'Become a pilot venue — personal onboarding and preferential early pricing.',
+      },
     },
 
     notFound: {

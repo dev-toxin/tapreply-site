@@ -25,7 +25,9 @@ export type PageKey =
   | 'faq'
   | 'about'
   | 'privacy'
-  | 'terms';
+  | 'terms'
+  | 'for/restaurants'
+  | 'for/hotels';
 
 export function t(lang: Lang): Dict {
   return dictionaries[lang];

@@ -24,6 +24,8 @@ export const es: Dict = {
     pricesNote: 'Precios de acceso anticipado: pueden cambiar.',
     emailUs: 'Escríbenos',
     onThisPage: 'En esta página',
+    forRestaurants: 'Para restaurantes y cafeterías',
+    forHotels: 'Para casas de huéspedes y hoteles',
   },
 
   nav: {
@@ -237,7 +239,7 @@ export const es: Dict = {
       security: {
         kicker: 'Seguridad y privacidad',
         title: 'Diseñado para que nunca entregues las llaves.',
-        text: 'Otras herramientas te piden las contraseñas de tus plataformas. TapReply no, y es a propósito.',
+        text: 'Tus plataformas siguen bajo tus propios accesos. TapReply nunca te pide las contraseñas, y es a propósito.',
         points: [
           'Sin contraseñas ni accesos a Google, Yandex, Booking u otras plataformas.',
           'Solo se procesan los textos de las reseñas y tus respuestas, nunca datos de pago de los clientes.',
@@ -255,6 +257,20 @@ export const es: Dict = {
         kicker: 'Preguntas',
         title: 'Respuestas breves.',
         more: 'Todas las preguntas',
+      },
+      compare: {
+        kicker: 'Comparación honesta',
+        title: 'TapReply frente a las respuestas con IA de Google',
+        sub: 'Google Business Profile también puede sugerir respuestas. Es una buena opción si Google es tu única plataforma.',
+        cols: ['', 'Sugerencias de Google', 'TapReply'],
+        rows: [
+          ['Plataformas', 'Solo Google', 'Google, Yandex Maps, 2GIS, Tripadvisor, Booking.com, TheFork, Facebook y más'],
+          ['Traducción de la reseña para ti', 'Sí, traducción automática', 'Sí, a tu idioma, junto al original'],
+          ['Traducción de tu respuesta de vuelta para ti', 'No como paso aparte', 'Sí: sabes exactamente qué publicas'],
+          ['Un solo listado para todas las reseñas', 'No', 'Sí'],
+          ['Precio', 'Gratis', 'Plan gratuito + planes de pago por local'],
+        ],
+        note: 'Según información pública a octubre de 2026; las funciones de Google pueden cambiar.',
       },
       cta: {
         title: 'Buscamos entre 3 y 10 locales piloto.',
@@ -671,6 +687,93 @@ export const es: Dict = {
           p: ['Dudas sobre estas condiciones: ceo@ankosoftlab.com.'],
         },
       ],
+    },
+
+    segments: {
+      restaurants: {
+        title: 'TapReply para restaurantes, cafeterías y bares',
+        description:
+          'Responde a las reseñas de turistas en Google, Yandex Maps, 2GIS, Tripadvisor y TheFork en su idioma, desde el móvil y entre comanda y comanda.',
+        kicker: 'Para restaurantes, cafeterías y bares',
+        h1: 'Responde a cada cliente entre dos comandas.',
+        lead: 'Los turistas te dejan reseñas en alemán, hebreo o coreano en cinco plataformas distintas. TapReply las reúne en un solo feed y prepara en segundos una respuesta en el idioma del cliente: tú solo la revisas y la envías.',
+        pains: [
+          {
+            title: 'Reseñas en idiomas que no lees',
+            text: 'Un cliente extranjero escribe una reseña detallada y no sabes con seguridad qué le gustó ni qué falló.',
+          },
+          {
+            title: 'Demasiadas plataformas',
+            text: 'Google, Yandex Maps, 2GIS, Tripadvisor, TheFork: cada una con su app y sus notificaciones.',
+          },
+          {
+            title: 'Sin tiempo durante el servicio',
+            text: 'Las respuestas se dejan para «luego» y luego nunca llega. Las reseñas negativas sin respuesta se quedan arriba.',
+          },
+        ],
+        how: [
+          {
+            title: 'Un solo feed, en plena sala',
+            text: 'Las reseñas nuevas y negativas de todas las plataformas en una lista en tu móvil. Google mediante la API oficial está en preparación; las demás, por correos de notificación o pegando el texto.',
+          },
+          {
+            title: 'Escudo para turistas',
+            text: 'La reseña traducida para ti, una respuesta en el idioma del cliente y la traducción de esa respuesta: sabes exactamente qué publicas.',
+          },
+          {
+            title: 'Diez segundos, un pulgar',
+            text: 'El borrador menciona el plato o el camarero del que habló el cliente. Tú apruebas, copias y pegas: nada sale sin ti.',
+          },
+        ],
+        example: {
+          platform: 'Combinación típica de una cafetería céntrica: Google, Tripadvisor, TheFork, Yandex Maps.',
+          note: 'En Yandex Maps el borrador se redacta en ruso, como espera la plataforma, con una traducción para ti si la necesitas.',
+        },
+        ctaTitle: '¿Tienes una cafetería, restaurante o bar con clientes extranjeros?',
+        ctaText: 'Únete al piloto: configuraremos contigo las plataformas y el tono de tu local.',
+      },
+      hotels: {
+        title: 'TapReply para casas de huéspedes y hoteles pequeños',
+        description:
+          'Responde a reseñas largas de Booking.com, Tripadvisor y Google de huéspedes de muchos países, en su idioma y con traducción para ti. Sin contraseñas.',
+        kicker: 'Para casas de huéspedes y hoteles pequeños',
+        h1: 'Reseñas largas, muchos idiomas: una respuesta tranquila.',
+        lead: 'Tus huéspedes vienen de todas partes y escriben con detalle sobre la habitación, el desayuno y el anfitrión. TapReply te ayuda a responder a cada uno de forma personal, en su idioma, sin dedicarle la tarde.',
+        pains: [
+          {
+            title: 'Reseñas largas y detalladas',
+            text: 'Los huéspedes escriben párrafos sobre el check-in, la limpieza y el desayuno. Una buena respuesta tiene que ir a lo concreto.',
+          },
+          {
+            title: 'Huéspedes de muchos países',
+            text: 'Alemán, francés, hebreo, polaco, chino: la traducción automática por sí sola no te dice si tu respuesta suena bien.',
+          },
+          {
+            title: 'Las reseñas influyen en las reservas',
+            text: 'Los futuros huéspedes leen cómo responde el anfitrión, sobre todo a las críticas. El silencio o una plantilla restan confianza.',
+          },
+        ],
+        how: [
+          {
+            title: 'Booking, Tripadvisor y Google en un solo sitio',
+            text: 'Reenvía los correos de notificación o pega la reseña. Google mediante la API oficial está en preparación. Nunca te pedimos la contraseña de la extranet.',
+          },
+          {
+            title: 'Una respuesta personal, punto por punto',
+            text: 'El borrador agradece lo que gustó y responde con calma a cada queja, con tu tono y en el idioma del huésped.',
+          },
+          {
+            title: 'Tú tienes el control',
+            text: 'Lee la traducción de tu respuesta, ajusta un detalle y pégala tú mismo en la extranet. La IA solo redacta.',
+          },
+        ],
+        example: {
+          platform: 'Combinación típica de una casa de huéspedes: Booking.com, Tripadvisor, Google.',
+          note: 'Las reseñas de Booking.com y Tripadvisor llegan por correos de notificación o pegando el texto; tú publicas la respuesta en sus paneles.',
+        },
+        ctaTitle: '¿Recibes huéspedes de muchos países?',
+        ctaText: 'Hazte local piloto: puesta en marcha personalizada y precios preferentes de lanzamiento.',
+      },
     },
 
     notFound: {
