@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from './Button.astro';
+import { href, t, type Lang } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const d = t(lang);
+const p = d.pages.notFound;
+---
+
+<BaseLayout lang={lang} page="404" title={p.title} description={p.description} noindex>
+  <section class="nf container">
+    <p class="nf__code" aria-hidden="true">404</p>
+    <h1>{p.h1}</h1>
+    <p class="lead">{p.text}</p>
+    <div class="nf__actions">
+      <Button href={href(lang)} size="lg" arrow>{p.home}</Button>
+      <Button href={href(lang, 'faq')} size="lg" variant="secondary">{d.nav.faq}</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    padding-block: clamp(80px, 14vw, 180px);
+    text-align: center;
+  }
+  .nf__code {
+    color: var(--accent-text);
+    font-size: clamp(4rem, 3rem + 6vw, 8rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+  .nf h1 {
+    margin-top: 16px;
+    font-size: var(--fs-h1-page);
+  }
+  .nf .lead {
+    margin-top: 16px;
+  }
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+</style>

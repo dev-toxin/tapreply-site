@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Icon from '../../components/Icon.astro';
+import { CONTACT_EMAIL, langPaths, mailto, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.pilot;
+const f = p.form;
+const blocks = [
+  { ...p.who, icon: 'user' },
+  { ...p.get, icon: 'check' },
+  { ...p.ask, icon: 'chat' },
+];
+const platformOptions = d.platforms.items.map((i) => i.name);
+const fallbackHref = mailto(f.subject);
+---
+
+<BaseLayout lang={lang} page="pilot" title={p.title} description={p.description}>
+  <PageHead kicker={d.nav.pilot} title={p.h1} lead={p.lead} />
+
+  <div class="container">
+    <div class="grid grid--3 blocks">
+      {
+        blocks.map((b) => (
+          <section class="pblock" aria-labelledby={`pb-${b.icon}`}>
+            <span class="pblock__icon">
+              <Icon name={b.icon} />
+            </span>
+            <h2 id={`pb-${b.icon}`}>{b.title}</h2>
+            <ul class="check-list">
+              {b.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <section id="apply" class="container apply" aria-labelledby="apply-h">
+    <div class="apply__card">
+      <div class="apply__intro">
+        <h2 id="apply-h">{f.title}</h2>
+        <p>{f.intro}</p>
+        <p class="apply__fallback">
+          {f.fallback} <a href={fallbackHref}>{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+
+      {/*
+        No backend yet. Without JS the form falls back to a plain mailto: submission.
+        With JS (public/scripts/pilot-form.js) it opens a pre-filled e-mail.
+        To connect a real handler later (Cloudflare Pages Function / Formspree), set
+        data-endpoint="https://…" and action/method accordingly — see docs/DECISIONS.md.
+      */}
+      <form
+        class="form"
+        id="pilot-form"
+        action={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(f.subject)}`}
+        method="post"
+        enctype="text/plain"
+        data-endpoint=""
+        data-to={CONTACT_EMAIL}
+        data-subject={f.subject}
+      >
+        <div class="form__row">
+          <label>
+            <span>{f.name}</span>
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            <span>{f.email}</span>
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+        </div>
+        <div class="form__row">
+          <label>
+            <span>{f.venue}</span>
+            <input name="venue" type="text" autocomplete="organization" required />
+          </label>
+          <label>
+            <span>{f.city}</span>
+            <input name="city" type="text" autocomplete="address-level2" />
+          </label>
+        </div>
+        <label>
+          <span>{f.type}</span>
+          <select name="type">
+            {f.typeOptions.map((o) => <option>{o}</option>)}
+          </select>
+        </label>
+        <fieldset>
+          <legend>{f.platforms}</legend>
+          <div class="chips">
+            {
+              platformOptions.map((o) => (
+                <label class="chip">
+                  <input type="checkbox" name="platforms" value={o} />
+                  <span>{o}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <label>
+          <span>{f.languages}</span>
+          <input name="languages" type="text" />
+        </label>
+        <label>
+          <span>{f.message}</span>
+          <textarea name="message" rows="4"></textarea>
+        </label>
+        <div class="form__foot">
+          <button type="submit" class="submit">
+            <Icon name="mail" size={20} />
+            {f.submit}
+          </button>
+          <p>{f.privacy}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+  <script is:inline src="/scripts/pilot-form.js" defer></script>
+</BaseLayout>
+
+<style>
+  .blocks {
+    padding-bottom: clamp(48px, 7vw, 88px);
+  }
+  .pblock {
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .pblock__icon {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 18px;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--accent-tint);
+    color: var(--accent-text);
+  }
+  .pblock h2 {
+    margin-bottom: 16px;
+    font-size: var(--fs-h3);
+    font-weight: 600;
+  }
+  .pblock :global(.check-list) {
+    font-size: var(--fs-sm);
+  }
+  .apply {
+    padding-bottom: var(--section-y);
+  }
+  .apply__card {
+    display: grid;
+    gap: 32px;
+    padding: clamp(24px, 4vw, 48px);
+    border: 1px solid rgba(255, 107, 0, 0.25);
+    border-radius: var(--r-xl);
+    background: var(--card);
+    box-shadow: var(--glow);
+  }
+  .apply__intro h2 {
+    font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  }
+  .apply__intro p {
+    margin-top: 12px;
+    color: var(--text-2);
+  }
+  .apply__fallback a {
+    color: var(--accent-text);
+  }
+  @media (min-width: 960px) {
+    .apply__card {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+      gap: 56px;
+    }
+  }
+  .form {
+    display: grid;
+    gap: 18px;
+  }
+  .form__row {
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 640px) {
+    .form__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  label > span,
+  legend {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  input[type='text'],
+  input[type='email'],
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 1rem;
+    transition: border-color 0.15s var(--ease);
+  }
+  textarea {
+    resize: vertical;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    position: relative;
+    cursor: pointer;
+  }
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    display: inline-block;
+    margin: 0;
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    transition:
+      background-color 0.15s var(--ease),
+      border-color 0.15s var(--ease);
+  }
+  .chip input:checked + span {
+    border-color: rgba(255, 107, 0, 0.6);
+    background: var(--accent-tint);
+    color: var(--accent-soft);
+  }
+  .chip input:focus-visible + span {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+  }
+  .form__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    align-items: center;
+  }
+  .form__foot p {
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+  }
+  .submit {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--accent);
+    color: #121214;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .submit:hover {
+    background: #ff7d1f;
+  }
+</style>

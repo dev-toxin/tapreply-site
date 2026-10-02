@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import { CONTACT_EMAIL, STUDIO_URL, langPaths, href, mailto, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.about;
+---
+
+<BaseLayout lang={lang} page="about" title={p.title} description={p.description}>
+  <PageHead kicker={d.nav.about} title={p.h1} lead={p.lead} />
+
+  <div class="container about">
+    <div class="about__text">
+      {p.paragraphs.map((para) => <p>{para}</p>)}
+    </div>
+
+    <aside class="about__side">
+      <dl class="facts">
+        {
+          p.facts.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="contact">
+        <h2>{p.contactTitle}</h2>
+        <p>{p.contactText}</p>
+        <a class="contact__mail" href={`mailto:${CONTACT_EMAIL}`}>
+          <Icon name="mail" size={20} />
+          {CONTACT_EMAIL}
+        </a>
+        <a class="contact__mail" href={STUDIO_URL} rel="noopener">
+          <Icon name="globe" size={20} />
+          {p.studioLink}: ankosoftlab.com
+        </a>
+        <div class="contact__cta">
+          <Button href={href(lang, 'pilot')} arrow>{d.common.ctaPilot}</Button>
+          <Button href={mailto('TapReply')} variant="secondary">{d.common.emailUs}</Button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .about {
+    display: grid;
+    gap: 40px;
+    padding-bottom: var(--section-y);
+  }
+  .about__text {
+    display: grid;
+    gap: 18px;
+    max-width: 64ch;
+    color: var(--text-2);
+    font-size: var(--fs-lead);
+  }
+  .facts {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .facts div {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .facts div:last-child {
+    border-bottom: 0;
+  }
+  dt {
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  dd {
+    margin: 4px 0 0;
+    font-weight: 500;
+  }
+  .contact {
+    margin-top: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 107, 0, 0.25);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .contact h2 {
+    font-size: var(--fs-h3);
+  }
+  .contact p {
+    margin: 8px 0 16px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .contact__mail {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-block: 6px;
+    color: var(--accent-text);
+    font-weight: 500;
+  }
+  .contact__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  @media (min-width: 960px) {
+    .about {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 64px;
+    }
+  }
+</style>

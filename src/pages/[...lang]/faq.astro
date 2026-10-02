@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import Button from '../../components/Button.astro';
+import { langPaths, mailto, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.faq;
+const faqLd = {
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: p.items.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+
+<BaseLayout lang={lang} page="faq" title={p.title} description={p.description} jsonLd={[faqLd]}>
+  <PageHead kicker={d.nav.faq} title={p.h1} lead={p.lead}>
+    <div class="ask"><Button href={mailto('TapReply — question')} variant="secondary">{d.common.emailUs}</Button></div>
+  </PageHead>
+  <div class="container container--narrow list">
+    <Faq items={p.items} headingLevel="h2" />
+  </div>
+  <Cta lang={lang} title={d.pages.home.cta.title} text={d.pages.home.cta.text} />
+</BaseLayout>
+
+<style>
+  .ask {
+    position: relative;
+    margin-top: 24px;
+  }
+  .list {
+    padding-bottom: var(--section-y);
+  }
+</style>

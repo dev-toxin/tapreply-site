@@ -1,6 +1,26 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { rename, rmdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+/**
+ * Cloudflare Pages serves the nearest `404.html` walking up from the requested path.
+ * With build.format 'directory', localized 404 pages land in /ru/404/index.html —
+ * move them to /ru/404.html so /ru/anything-missing gets the Russian 404.
+ */
+const localized404 = {
+  name: 'localized-404',
+  hooks: {
+    'astro:build:done': async ({ dir }) => {
+      const root = fileURLToPath(dir);
+      for (const l of ['ru', 'es']) {
+        await rename(`${root}${l}/404/index.html`, `${root}${l}/404.html`);
+        await rmdir(`${root}${l}/404`);
+      }
+    },
+  },
+};
 
 export default defineConfig({
   site: 'https://www.tapreply.net',
@@ -16,6 +36,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
+    localized404,
     sitemap({
       filter: (page) => !page.includes('/404'),
       i18n: {

@@ -56,6 +56,8 @@ const s = d.shield;
     }
   }
   .demo__block {
+    min-width: 0;
+    overflow-wrap: break-word;
     padding: clamp(20px, 2.4vw, 28px);
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
@@ -68,8 +70,9 @@ const s = d.shield;
   }
   .demo__head {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    gap: 8px 12px;
     margin-bottom: 14px;
   }
   .demo__num {
@@ -91,7 +94,6 @@ const s = d.shield;
     margin-left: auto;
     color: var(--text-2);
     font-size: var(--fs-xs);
-    white-space: nowrap;
   }
   .demo__block p {
     color: #e6e6ec;

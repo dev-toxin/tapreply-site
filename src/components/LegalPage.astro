@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHead from './PageHead.astro';
+import { t, type Lang } from '../i18n/utils';
+interface Props {
+  lang: Lang;
+  page: 'privacy' | 'terms';
+}
+const { lang, page } = Astro.props;
+const d = t(lang);
+const p = d.pages[page];
+---
+
+<BaseLayout lang={lang} page={page} title={p.title} description={p.description}>
+  <PageHead title={p.h1}>
+    <p class="updated">{d.common.lastUpdated}</p>
+  </PageHead>
+  <div class="container container--narrow legal">
+    <div class="draft" role="note">
+      <strong>{d.common.draftTitle}</strong>
+      <p>{d.common.draftText}</p>
+    </div>
+    <article class="prose">
+      {
+        p.sections.map((s) => (
+          <section>
+            <h2>{s.h}</h2>
+            {s.p.map((para) => (
+              <p>{para}</p>
+            ))}
+          </section>
+        ))
+      }
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .updated {
+    position: relative;
+    margin-top: 14px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .legal {
+    padding-bottom: var(--section-y);
+  }
+  .draft {
+    padding: 18px 20px;
+    border: 1px solid rgba(255, 157, 61, 0.4);
+    border-radius: var(--r-md);
+    background: rgba(255, 107, 0, 0.08);
+  }
+  .draft strong {
+    color: var(--accent-soft);
+  }
+  .draft p {
+    margin-top: 6px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+</style>

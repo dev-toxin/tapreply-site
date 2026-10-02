@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import PlanCards from '../../components/PlanCards.astro';
+import Faq from '../../components/Faq.astro';
+import Badge from '../../components/Badge.astro';
+import Cta from '../../components/Cta.astro';
+import { langPaths, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.pricing;
+---
+
+<BaseLayout lang={lang} page="pricing" title={p.title} description={p.description}>
+  <PageHead kicker={d.nav.pricing} title={p.h1} lead={p.lead}>
+    <div class="flag"><Badge variant="accent">{d.common.pricesNote}</Badge></div>
+  </PageHead>
+
+  <div class="container block">
+    <PlanCards lang={lang} />
+  </div>
+
+  <section class="container block faqsec" aria-labelledby="pay-faq">
+    <h2 id="pay-faq">{p.faqTitle}</h2>
+    <Faq items={p.faq} />
+  </section>
+
+  <Cta lang={lang} title={d.pages.home.cta.title} text={d.pages.home.cta.text} />
+</BaseLayout>
+
+<style>
+  .flag {
+    position: relative;
+    margin-top: 24px;
+  }
+  .block {
+    padding-bottom: clamp(56px, 8vw, 96px);
+  }
+  .faqsec {
+    max-width: calc(860px + var(--gutter) * 2);
+  }
+  .faqsec h2 {
+    margin-bottom: 24px;
+    font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  }
+</style>
