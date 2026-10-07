@@ -58,7 +58,7 @@ for (const file of files) {
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${rel}: missing meta description`);
   if (!is404) {
     if (!/<link rel="canonical"/.test(html)) errors.push(`${rel}: missing canonical`);
-    for (const l of ['en', 'ru', 'es', 'x-default'])
+    for (const l of ['en', 'ru', 'x-default'])
       if (!html.includes(`hreflang="${l}"`)) errors.push(`${rel}: missing hreflang ${l}`);
   }
   if (/<img(?![^>]*\balt=)[^>]*>/.test(html)) errors.push(`${rel}: <img> without alt`);

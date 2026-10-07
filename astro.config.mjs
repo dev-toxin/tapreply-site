@@ -14,7 +14,7 @@ const localized404 = {
   hooks: {
     'astro:build:done': async ({ dir }) => {
       const root = fileURLToPath(dir);
-      for (const l of ['ru', 'es']) {
+      for (const l of ['ru']) {
         await rename(`${root}${l}/404/index.html`, `${root}${l}/404.html`);
         await rmdir(`${root}${l}/404`);
       }
@@ -32,7 +32,7 @@ export default defineConfig({
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ru', 'es'],
+    locales: ['en', 'ru'],
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
@@ -41,7 +41,7 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
       i18n: {
         defaultLocale: 'en',
-        locales: { en: 'en', ru: 'ru', es: 'es' },
+        locales: { en: 'en', ru: 'ru' },
       },
     }),
   ],

@@ -20,7 +20,7 @@ npm test           # build + check:links
 
 ```
 src/
-  i18n/            en.ts (эталон, задаёт тип Dict), ru.ts, es.ts, utils.ts (языки, href(), mailto())
+  i18n/            en.ts (эталон, задаёт тип Dict), ru.ts, utils.ts (языки, href(), mailto())
   layouts/         BaseLayout.astro — <head>: SEO, canonical, hreflang, OG/Twitter, JSON-LD, favicon
   components/      Header, Footer, Button, Card, Section, Badge, Icon (inline SVG), Faq (<details>),
                    PhoneMockup (CSS-анимация щита), ShieldDemo, Platforms (бейджи / таблица),
@@ -28,7 +28,7 @@ src/
   pages/
     [...lang]/     index, features, how-it-works, pricing, pilot, faq, about, privacy, terms
                    (одна страница → все языки через getStaticPaths)
-    404.astro, ru/404.astro, es/404.astro
+    404.astro, ru/404.astro
   styles/global.css  дизайн-токены (CSS custom properties) и базовые стили
 public/            _headers, _redirects, CNAME, robots.txt, site.webmanifest, favicon*, og-image.png,
                    brand/ (логотипы), fonts/ (Inter woff2, self-hosted), scripts/pilot-form.js

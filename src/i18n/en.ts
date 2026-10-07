@@ -1,5 +1,5 @@
 // English dictionary — the source of truth for the dictionary shape (type Dict).
-// ru.ts and es.ts must mirror this structure exactly.
+// ru.ts must mirror this structure exactly.
 
 export const en = {
   htmlLang: 'en',
@@ -309,7 +309,7 @@ export const en = {
           icon: 'globe',
           title: 'The guest’s language — or the platform’s',
           text: 'By default TapReply replies in the language of the review. Where a platform expects a specific language (for example, Russian on Yandex Maps), the draft follows the platform.',
-          points: ['Interface: English, Russian, Spanish', 'Your translation language is set separately from the interface', 'Guest languages: all major European and Asian languages'],
+          points: ['Interface: English and Russian', 'Your translation language is set separately from the interface', 'Guest languages: all major European and Asian languages'],
         },
         {
           id: 'tone',
@@ -380,7 +380,7 @@ export const en = {
     pricing: {
       title: 'Pricing — TapReply',
       description:
-        'TapReply plans per venue: Free with 5 AI replies a month, Pilot / Individual, Multi for 3–5 venues and Chain. Early access — pricing announced at launch.',
+        'TapReply plans per venue: Free with 5 AI replies a month and Early access for pilot venues. Pricing announced at launch.',
       h1: 'Pricing per venue. Start free.',
       lead: 'Early access — pricing announced at launch. Pilot venues agree terms with us individually and will hear about final prices first.',
       plans: [
@@ -394,33 +394,16 @@ export const en = {
           highlight: false,
         },
         {
-          name: 'Pilot / Individual',
-          price: 'Early access',
+          name: 'Early access',
+          price: 'Pricing at launch',
           period: 'pricing announced at launch',
           desc: 'For one café, restaurant, bar or guest house.',
           features: ['1 venue', 'AI replies for your normal review volume', 'Tourist Shield and venue tone', 'Notification e-mail forwarding', 'Personal onboarding during the pilot'],
           cta: 'Become a pilot',
           highlight: true,
         },
-        {
-          name: 'Multi',
-          price: 'Early access',
-          period: '3–5 venues · pricing announced at launch',
-          desc: 'For owners with several places.',
-          features: ['3–5 venues in one account', 'Lower price per venue', 'One feed, filters by venue'],
-          cta: 'Discuss',
-          highlight: false,
-        },
-        {
-          name: 'Chain',
-          price: 'Custom quote',
-          period: '',
-          desc: 'For chains and hotel groups.',
-          features: ['6+ venues', 'Custom limits', 'Invoice billing'],
-          cta: 'Contact us',
-          highlight: false,
-        },
       ],
+      chains: { text: 'Chains and groups —', cta: 'contact us' },
       faqTitle: 'Payment questions',
       faq: [
         {
@@ -510,7 +493,7 @@ export const en = {
         },
         {
           q: 'Which languages are supported?',
-          a: 'Guests: all major European and Asian languages are understood and answered. Interface: English, Russian and Spanish. Your translation language can be set separately.',
+          a: 'Guests: all major European and Asian languages are understood and answered. Interface: English and Russian. Your translation language can be set separately.',
         },
         {
           q: 'What about Yandex Maps?',
@@ -546,7 +529,7 @@ export const en = {
         },
         {
           q: 'Can I manage several venues?',
-          a: 'Yes. The Multi plan covers 3–5 venues with a discount per venue; for larger groups — Chain, with a custom quote.',
+          a: 'Yes. For several venues, chains and hotel groups write to us — we agree terms individually.',
         },
         {
           q: 'Is TapReply already available?',
@@ -589,7 +572,7 @@ export const en = {
         {
           h: 'Who we are',
           p: [
-            'TapReply is operated by Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs. Contact: ceo@ankosoftlab.com.',
+            'TapReply is operated by Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs. Contact: contact@ankosoftlab.com.',
           ],
         },
         {
@@ -613,7 +596,7 @@ export const en = {
         {
           h: 'Processors',
           p: [
-            'We use carefully selected service providers: hosting and database infrastructure located in the EU, and an AI model provider that processes review texts only to generate translations and reply drafts. To receive the current list of processors, write to ceo@ankosoftlab.com.',
+            'We use carefully selected service providers: hosting and database infrastructure located in the EU, and an AI model provider that processes review texts only to generate translations and reply drafts. To receive the current list of processors, write to contact@ankosoftlab.com.',
           ],
         },
         {
@@ -625,7 +608,7 @@ export const en = {
         {
           h: 'Your rights',
           p: [
-            'You can ask us for a copy of your data, to correct it or to delete it. Write to ceo@ankosoftlab.com from the e-mail address linked to your account.',
+            'You can ask us for a copy of your data, to correct it or to delete it. Write to contact@ankosoftlab.com from the e-mail address linked to your account.',
           ],
         },
         {
@@ -684,7 +667,7 @@ export const en = {
         },
         {
           h: 'Contact',
-          p: ['Questions about these terms: ceo@ankosoftlab.com.'],
+          p: ['Questions about these terms: contact@ankosoftlab.com.'],
         },
       ],
     },
