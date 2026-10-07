@@ -73,5 +73,5 @@ LOGO_SRC="/путь/к/tr_logo.png" node scripts/build-brand.mjs
 - `public/favicon.svg` — временный векторный знак; нужен финальный вектор логотипа.
 - Цены — гипотеза раннего доступа (см. `docs/DECISIONS.md`).
 - Испанские тексты — нужна вычитка носителем.
-- `/privacy`, `/terms` — черновики, номер регистрации ИП — `[TODO]`, нужна вычитка юристом.
+- `/privacy`, `/terms` — черновики; оператор — Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs (решение 2026-10-07); нужна вычитка юристом.
 - Форма пилота открывает почтовый клиент (mailto); реальный обработчик не подключён.

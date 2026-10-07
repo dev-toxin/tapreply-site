@@ -26,6 +26,9 @@ const org = {
   '@type': 'Organization',
   '@id': abs('/#organization'),
   name: 'AnKo Software Labs',
+  legalName: 'Individual Entrepreneur Anton Kozyrev (Georgia)',
+  identifier: '304822565',
+  description: 'Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs',
   url: STUDIO_URL,
   email: CONTACT_EMAIL,
   logo: abs('/brand/logo-512.png'),
@@ -52,21 +55,6 @@ if (page === '') {
       description,
       inLanguage: lang,
       publisher: { '@id': abs('/#organization') },
-      offers: [
-        { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' },
-        {
-          '@type': 'Offer',
-          name: 'Pilot / Individual',
-          priceCurrency: 'USD',
-          priceSpecification: {
-            '@type': 'UnitPriceSpecification',
-            minPrice: '19',
-            maxPrice: '29',
-            priceCurrency: 'USD',
-            unitText: 'venue per month',
-          },
-        },
-      ],
     },
   );
 }

@@ -21,7 +21,7 @@ export const es: Dict = {
     draftText:
       'Este documento es un borrador de trabajo que publicamos por transparencia durante el piloto. Un abogado lo revisará antes del lanzamiento comercial.',
     lastUpdated: 'Última actualización: 2 de octubre de 2026',
-    pricesNote: 'Precios de acceso anticipado: pueden cambiar.',
+    pricesNote: 'Acceso anticipado: los precios se anunciarán en el lanzamiento.',
     emailUs: 'Escríbenos',
     onThisPage: 'En esta página',
     forRestaurants: 'Para restaurantes y cafeterías',
@@ -46,7 +46,7 @@ export const es: Dict = {
     terms: 'Condiciones de uso',
     contact: 'Contacto',
     studio: 'AnKo Software Labs',
-    rights: '© 2026 AnKo Software Labs, empresario individual, Georgia',
+    rights: '© 2026 Empresario individual Anton Kozyrev (Georgia), ID 304822565, que opera como AnKo Software Labs',
   },
 
   shield: {
@@ -250,7 +250,7 @@ export const es: Dict = {
       pricing: {
         kicker: 'Precios',
         title: 'Precios sencillos por local.',
-        sub: 'Empieza gratis. Los precios de acceso anticipado son un punto de partida y pueden cambiar.',
+        sub: 'Empieza gratis. Acceso anticipado: los precios se anunciarán en el lanzamiento.',
         more: 'Ver todos los planes',
       },
       faq: {
@@ -380,13 +380,13 @@ export const es: Dict = {
     pricing: {
       title: 'Precios — TapReply',
       description:
-        'Precios de acceso anticipado por local: Free con 5 respuestas con IA al mes, Pilot / Individual en torno a 19–29 $ por local, descuentos para 3–5 locales y Chain bajo consulta.',
+        'Planes de TapReply por local: Free con 5 respuestas con IA al mes, Pilot / Individual, Multi para 3–5 locales y Chain. Acceso anticipado: los precios se anunciarán en el lanzamiento.',
       h1: 'Precio por local. Empieza gratis.',
-      lead: 'Son precios de acceso anticipado. Los estamos validando con los locales piloto, así que pueden cambiar; los locales piloto siempre serán los primeros en saberlo.',
+      lead: 'Acceso anticipado: los precios se anunciarán en el lanzamiento. Con los locales piloto acordamos condiciones de forma individual y serán los primeros en conocer los precios finales.',
       plans: [
         {
           name: 'Free',
-          price: '0 $',
+          price: 'Gratis',
           period: '',
           desc: 'Para probar TapReply con reseñas reales.',
           features: ['1 local', '5 respuestas con IA al mes', 'Escudo para turistas', 'Todas las plataformas pegando el texto'],
@@ -395,8 +395,8 @@ export const es: Dict = {
         },
         {
           name: 'Pilot / Individual',
-          price: '19–29 $',
-          period: 'por local / mes · orientativo',
+          price: 'Acceso anticipado',
+          period: 'precios en el lanzamiento',
           desc: 'Para una cafetería, restaurante, bar o casa de huéspedes.',
           features: ['1 local', 'Respuestas con IA para tu volumen habitual de reseñas', 'Escudo para turistas y tono del local', 'Reenvío de correos de aviso', 'Puesta en marcha personalizada durante el piloto'],
           cta: 'Quiero ser piloto',
@@ -404,8 +404,8 @@ export const es: Dict = {
         },
         {
           name: 'Multi',
-          price: 'Descuento',
-          period: 'por local, 3–5 locales',
+          price: 'Acceso anticipado',
+          period: '3–5 locales · precios en el lanzamiento',
           desc: 'Para quien tiene varios locales.',
           features: ['3–5 locales en una cuenta', 'Precio más bajo por local', 'Una sola lista, con filtro por local'],
           cta: 'Hablemos',
@@ -413,7 +413,7 @@ export const es: Dict = {
         },
         {
           name: 'Chain',
-          price: 'Bajo consulta',
+          price: 'A medida',
           period: '',
           desc: 'Para cadenas y grupos hoteleros.',
           features: ['6 o más locales', 'Límites a medida', 'Pago por factura'],
@@ -428,8 +428,8 @@ export const es: Dict = {
           a: 'Mediante factura mensual. Durante el piloto no hay cargos automáticos en tarjeta.',
         },
         {
-          q: '¿Cambiará el precio?',
-          a: 'Es posible: son precios de acceso anticipado. Si cambian, avisaremos con antelación a los locales piloto, y las condiciones acordadas contigo se mantendrán hasta el final del periodo pactado.',
+          q: '¿Cuándo se publicarán los precios?',
+          a: 'Los precios finales se anunciarán en el lanzamiento. Los locales piloto lo sabrán con antelación, y las condiciones acordadas contigo se mantendrán hasta el final del periodo pactado.',
         },
         {
           q: '¿Qué cuenta como una respuesta con IA?',
@@ -542,11 +542,11 @@ export const es: Dict = {
         },
         {
           q: '¿Cuánto cuesta?',
-          a: 'Free: 1 local y 5 respuestas con IA al mes. Los planes de pago parten de un precio orientativo de 19–29 $ por local al mes. Son precios de acceso anticipado y pueden cambiar.',
+          a: 'Free: 1 local y 5 respuestas con IA al mes. Acceso anticipado: los precios de los planes de pago se anunciarán en el lanzamiento; con los locales piloto acordamos condiciones de forma individual.',
         },
         {
           q: '¿Puedo gestionar varios locales?',
-          a: 'Sí. El plan Multi cubre 3–5 locales con descuento por local; para grupos más grandes, Chain, bajo consulta.',
+          a: 'Sí. El plan Multi cubre 3–5 locales con descuento por local; para grupos más grandes, Chain, con presupuesto a medida.',
         },
         {
           q: '¿TapReply ya está disponible?',
@@ -572,7 +572,7 @@ export const es: Dict = {
       ],
       facts: [
         { label: 'Estudio', value: 'AnKo Software Labs' },
-        { label: 'Forma jurídica', value: 'Empresario individual, Georgia' },
+        { label: 'Forma jurídica', value: 'Empresario individual Anton Kozyrev (Georgia), ID 304822565' },
         { label: 'Fase', value: 'Acceso anticipado, programa piloto' },
         { label: 'Primeros mercados', value: 'Georgia y Kazajistán; después, España y Latinoamérica' },
       ],
@@ -589,7 +589,7 @@ export const es: Dict = {
         {
           h: 'Quiénes somos',
           p: [
-            'TapReply lo gestiona AnKo Software Labs, empresario individual registrado en Georgia (número de registro: [TODO]). Contacto: ceo@ankosoftlab.com.',
+            'TapReply lo gestiona Empresario individual Anton Kozyrev (Georgia), ID 304822565, que opera como AnKo Software Labs. Contacto: ceo@ankosoftlab.com.',
           ],
         },
         {
@@ -613,7 +613,7 @@ export const es: Dict = {
         {
           h: 'Encargados del tratamiento',
           p: [
-            'Trabajamos con proveedores seleccionados con cuidado: infraestructura de alojamiento y base de datos ubicada en la UE, y un proveedor de modelos de IA que procesa los textos de las reseñas únicamente para generar traducciones y borradores de respuesta. La lista de encargados está disponible a petición.',
+            'Trabajamos con proveedores seleccionados con cuidado: infraestructura de alojamiento y base de datos ubicada en la UE, y un proveedor de modelos de IA que procesa los textos de las reseñas únicamente para generar traducciones y borradores de respuesta. Para recibir la lista actual de encargados, escribe a ceo@ankosoftlab.com.',
           ],
         },
         {
@@ -649,7 +649,7 @@ export const es: Dict = {
         {
           h: 'El servicio',
           p: [
-            'TapReply lo presta AnKo Software Labs, empresario individual registrado en Georgia (número de registro: [TODO]). TapReply te ayuda a preparar respuestas a reseñas con IA, incluidas las traducciones.',
+            'TapReply lo presta Empresario individual Anton Kozyrev (Georgia), ID 304822565, que opera como AnKo Software Labs. TapReply te ayuda a preparar respuestas a reseñas con IA, incluidas las traducciones.',
             'El servicio está en acceso anticipado. Las funciones pueden cambiar y puede haber interrupciones.',
           ],
         },
@@ -669,7 +669,7 @@ export const es: Dict = {
         {
           h: 'Pago',
           p: [
-            'El uso gratuito está limitado según se indica en la página de Precios. Durante el piloto, los planes de pago se facturan mediante factura; no hay cargos automáticos en tarjeta. Los precios son de acceso anticipado y pueden cambiar con previo aviso.',
+            'El uso gratuito está limitado según se indica en la página de Precios. Durante el piloto, los planes de pago se facturan mediante factura; no hay cargos automáticos en tarjeta. Acceso anticipado: los precios se anunciarán en el lanzamiento; cualquier cambio en las condiciones acordadas se avisará con antelación.',
           ],
         },
         {

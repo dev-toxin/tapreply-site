@@ -20,7 +20,7 @@ export const en = {
     draftText:
       'This document is a working draft published for transparency during the pilot. It will be reviewed by a lawyer before the commercial launch.',
     lastUpdated: 'Last updated: 2 October 2026',
-    pricesNote: 'Early-access pricing — prices may change.',
+    pricesNote: 'Early access — pricing announced at launch.',
     emailUs: 'Email us',
     onThisPage: 'On this page',
     forRestaurants: 'For restaurants & cafés',
@@ -45,7 +45,7 @@ export const en = {
     terms: 'Terms of use',
     contact: 'Contact',
     studio: 'AnKo Software Labs',
-    rights: '© 2026 AnKo Software Labs, individual entrepreneur, Georgia',
+    rights: '© 2026 Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs',
   },
 
   // The Tourist Shield example used in the hero mockup and the demo section.
@@ -250,7 +250,7 @@ export const en = {
       pricing: {
         kicker: 'Pricing',
         title: 'Simple pricing per venue.',
-        sub: 'Start free. Early-access prices are a starting point and may change.',
+        sub: 'Start free. Early access — pricing announced at launch.',
         more: 'See all plans',
       },
       faq: {
@@ -330,7 +330,7 @@ export const en = {
           icon: 'lock',
           title: 'Security by design',
           text: 'TapReply does not ask for passwords to your review platforms and never logs in on your behalf. AI prepares a draft; a person always confirms it.',
-          points: ['No platform passwords', 'Human approval for every reply', 'Data deletion on request'],
+          points: ['No platform passwords', 'Human approval for every reply', 'Data deletion whenever you ask'],
         },
       ],
       cta: {
@@ -380,13 +380,13 @@ export const en = {
     pricing: {
       title: 'Pricing — TapReply',
       description:
-        'Early-access pricing per venue: Free with 5 AI replies a month, Pilot / Individual around $19–29 per venue, discounts for 3–5 venues, Chain on request.',
+        'TapReply plans per venue: Free with 5 AI replies a month, Pilot / Individual, Multi for 3–5 venues and Chain. Early access — pricing announced at launch.',
       h1: 'Pricing per venue. Start free.',
-      lead: 'These are early-access prices. We are testing them with pilot venues, so they may change — pilot venues will always hear about it first.',
+      lead: 'Early access — pricing announced at launch. Pilot venues agree terms with us individually and will hear about final prices first.',
       plans: [
         {
           name: 'Free',
-          price: '$0',
+          price: 'Free',
           period: '',
           desc: 'To try TapReply on real reviews.',
           features: ['1 venue', '5 AI replies per month', 'Tourist Shield', 'All platforms via paste'],
@@ -395,8 +395,8 @@ export const en = {
         },
         {
           name: 'Pilot / Individual',
-          price: '$19–29',
-          period: 'per venue / month · target',
+          price: 'Early access',
+          period: 'pricing announced at launch',
           desc: 'For one café, restaurant, bar or guest house.',
           features: ['1 venue', 'AI replies for your normal review volume', 'Tourist Shield and venue tone', 'Notification e-mail forwarding', 'Personal onboarding during the pilot'],
           cta: 'Become a pilot',
@@ -404,8 +404,8 @@ export const en = {
         },
         {
           name: 'Multi',
-          price: 'Discount',
-          period: 'per venue, 3–5 venues',
+          price: 'Early access',
+          period: '3–5 venues · pricing announced at launch',
           desc: 'For owners with several places.',
           features: ['3–5 venues in one account', 'Lower price per venue', 'One feed, filters by venue'],
           cta: 'Discuss',
@@ -413,7 +413,7 @@ export const en = {
         },
         {
           name: 'Chain',
-          price: 'On request',
+          price: 'Custom quote',
           period: '',
           desc: 'For chains and hotel groups.',
           features: ['6+ venues', 'Custom limits', 'Invoice billing'],
@@ -428,8 +428,8 @@ export const en = {
           a: 'By invoice, monthly. There are no automatic card charges during the pilot.',
         },
         {
-          q: 'Will the price change?',
-          a: 'Possibly — these are early-access prices. If they change, we will tell pilot venues in advance, and the terms agreed with you individually remain in force until the end of the agreed period.',
+          q: 'When will prices be published?',
+          a: 'Final pricing will be announced at launch. Pilot venues will hear about it in advance, and the terms agreed with you individually remain in force until the end of the agreed period.',
         },
         {
           q: 'What counts as an AI reply?',
@@ -542,11 +542,11 @@ export const en = {
         },
         {
           q: 'How much does it cost?',
-          a: 'Free: 1 venue and 5 AI replies per month. Paid plans start from a target of $19–29 per venue per month. These are early-access prices and may change.',
+          a: 'Free: 1 venue and 5 AI replies per month. Early access — pricing for paid plans will be announced at launch; pilot venues agree terms individually.',
         },
         {
           q: 'Can I manage several venues?',
-          a: 'Yes. The Multi plan covers 3–5 venues with a discount per venue; for larger groups — Chain, on request.',
+          a: 'Yes. The Multi plan covers 3–5 venues with a discount per venue; for larger groups — Chain, with a custom quote.',
         },
         {
           q: 'Is TapReply already available?',
@@ -572,7 +572,7 @@ export const en = {
       ],
       facts: [
         { label: 'Studio', value: 'AnKo Software Labs' },
-        { label: 'Legal form', value: 'Individual entrepreneur, Georgia' },
+        { label: 'Legal form', value: 'Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565' },
         { label: 'Stage', value: 'Early access, pilot program' },
         { label: 'First markets', value: 'Georgia, Kazakhstan; then Spain and Latin America' },
       ],
@@ -589,7 +589,7 @@ export const en = {
         {
           h: 'Who we are',
           p: [
-            'TapReply is operated by AnKo Software Labs, an individual entrepreneur registered in Georgia (registration number: [TODO]). Contact: ceo@ankosoftlab.com.',
+            'TapReply is operated by Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs. Contact: ceo@ankosoftlab.com.',
           ],
         },
         {
@@ -613,7 +613,7 @@ export const en = {
         {
           h: 'Processors',
           p: [
-            'We use carefully selected service providers: hosting and database infrastructure located in the EU, and an AI model provider that processes review texts only to generate translations and reply drafts. The list of processors is available on request.',
+            'We use carefully selected service providers: hosting and database infrastructure located in the EU, and an AI model provider that processes review texts only to generate translations and reply drafts. To receive the current list of processors, write to ceo@ankosoftlab.com.',
           ],
         },
         {
@@ -649,7 +649,7 @@ export const en = {
         {
           h: 'The service',
           p: [
-            'TapReply is provided by AnKo Software Labs, an individual entrepreneur registered in Georgia (registration number: [TODO]). TapReply helps you prepare replies to reviews using AI, including translations.',
+            'TapReply is provided by Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs. TapReply helps you prepare replies to reviews using AI, including translations.',
             'The service is in early access. Features may change, and there may be interruptions.',
           ],
         },
@@ -669,7 +669,7 @@ export const en = {
         {
           h: 'Payment',
           p: [
-            'Free use is limited as described on the Pricing page. Paid plans during the pilot are billed by invoice; there are no automatic card charges during the pilot. Prices are early-access prices and may change with advance notice.',
+            'Free use is limited as described on the Pricing page. Paid plans during the pilot are billed by invoice; there are no automatic card charges during the pilot. Early access — pricing announced at launch; any change to agreed terms is notified in advance.',
           ],
         },
         {
