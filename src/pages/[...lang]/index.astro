@@ -6,7 +6,7 @@ import Card from '../../components/Card.astro';
 import Section from '../../components/Section.astro';
 import PhoneMockup from '../../components/PhoneMockup.astro';
 import Platforms from '../../components/Platforms.astro';
-import ShieldDemo from '../../components/ShieldDemo.astro';
+import LiveDemo from '../../components/LiveDemo.astro';
 import PlanCards from '../../components/PlanCards.astro';
 import Faq from '../../components/Faq.astro';
 import Cta from '../../components/Cta.astro';
@@ -46,14 +46,19 @@ const stepIcons = ['link', 'translate', 'send'];
     </div>
   </section>
 
+  <!-- LIVE DEMO: review → draft → owner approves (pre-written samples, no LLM) -->
+  <Section id="shield" kicker={h.shield.kicker} title={h.shield.title} sub={h.shield.sub} tone="deep">
+    <LiveDemo lang={lang} />
+  </Section>
+
   <!-- PLATFORMS -->
-  <Section id="platforms" kicker={h.platforms.kicker} title={h.platforms.title} sub={h.platforms.sub} tone="deep">
+  <Section id="platforms" kicker={h.platforms.kicker} title={h.platforms.title} sub={h.platforms.sub}>
     <Platforms lang={lang} />
     <p class="more"><Button href={href(lang, 'how-it-works')} variant="ghost" arrow>{h.platforms.more}</Button></p>
   </Section>
 
   <!-- HOW -->
-  <Section id="how" kicker={h.how.kicker} title={h.how.title}>
+  <Section id="how" kicker={h.how.kicker} title={h.how.title} tone="deep">
     <ol class="how grid grid--3">
       {
         h.how.steps.map((s, i) => (
@@ -67,10 +72,6 @@ const stepIcons = ['link', 'translate', 'send'];
     </ol>
   </Section>
 
-  <!-- SHIELD DEMO -->
-  <Section id="shield" kicker={h.shield.kicker} title={h.shield.title} sub={h.shield.sub} tone="deep">
-    <ShieldDemo lang={lang} />
-  </Section>
 
   <!-- WHY -->
   <Section id="why" kicker={h.why.kicker} title={h.why.title}>
@@ -127,7 +128,7 @@ const stepIcons = ['link', 'translate', 'send'];
   </Section>
 
   <!-- FAQ -->
-  <Section id="faq" kicker={h.faq.kicker} title={h.faq.title} tone="deep">
+  <Section id="faq" kicker={h.faq.kicker} title={h.faq.title} tone="light">
     <div class="faq-wrap">
       <Faq items={d.pages.faq.items.slice(0, 5)} />
       <p class="more"><Button href={href(lang, 'faq')} variant="ghost" arrow>{h.faq.more}</Button></p>

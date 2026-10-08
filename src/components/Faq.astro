@@ -85,4 +85,23 @@ const H = headingLevel;
     color: var(--text-2);
     max-width: 68ch;
   }
+  /* On light sections (better reading on a phone in daylight). */
+  :global(.section--light) .faq__item {
+    border-color: rgba(24, 24, 27, 0.1);
+    background: var(--light-card);
+    color: var(--light-text);
+  }
+  :global(.section--light) .faq__item[open] {
+    border-color: rgba(24, 24, 27, 0.2);
+  }
+  :global(.section--light) .faq__toggle {
+    border-color: rgba(24, 24, 27, 0.2);
+  }
+  :global(.section--light) .faq__toggle::before,
+  :global(.section--light) .faq__toggle::after {
+    background: var(--light-text-2);
+  }
+  :global(.section--light) .faq__a {
+    color: var(--light-text-2);
+  }
 </style>

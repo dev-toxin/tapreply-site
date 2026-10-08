@@ -67,6 +67,9 @@ const { href, variant = 'primary', size = 'md', class: cls, arrow = false } = As
     padding-inline: 4px;
     color: var(--accent-text);
   }
+  :global(.section--light) .btn--ghost {
+    color: var(--light-accent-text);
+  }
   .btn:active {
     transform: translateY(1px);
   }

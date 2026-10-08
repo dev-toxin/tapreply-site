@@ -1,0 +1,480 @@
+---
+/**
+ * Interactive demo: guest review → draft reply → owner approves.
+ * Pre-written samples from the dictionary, no LLM and no network calls.
+ * Without JS every sample is visible as a static list with the reply shown.
+ */
+import { t, type Lang } from '../i18n/utils';
+import Icon from './Icon.astro';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const d = t(lang).liveDemo;
+const fill = (s: string, k: string, v: string | number) => s.replace(`{${k}}`, String(v));
+---
+
+<div class="ld" data-ld data-drafting={d.drafting} data-again={d.again} data-draft={d.draft}>
+  <div class="ld__top">
+    <span class="ld__badge"><span class="ld__dot" aria-hidden="true"></span>{d.badge}</span>
+    <span class="ld__venue">{d.venue}</span>
+  </div>
+
+  <div class="ld__tabs" role="tablist" aria-label={d.tabsLabel} hidden data-ld-tabs>
+    {
+      d.samples.map((s, i) => (
+        <button
+          type="button"
+          role="tab"
+          class="ld__tab"
+          id={`ld-tab-${s.id}`}
+          aria-controls={`ld-panel-${s.id}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+        >
+          <span class="ld__code">{s.lang.toUpperCase()}</span>
+          {s.langName}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    d.samples.map((s, i) => (
+      <section
+        class="ld__panel"
+        id={`ld-panel-${s.id}`}
+        role="tabpanel"
+        aria-labelledby={`ld-tab-${s.id}`}
+        data-ld-panel
+      >
+        <article class="ld__card ld__card--review">
+          <header class="ld__head">
+            <span class="ld__avatar" aria-hidden="true">{s.guest.slice(0, 1)}</span>
+            <span class="ld__who">
+              <strong>{s.guest}</strong>
+              <span class="ld__meta">{fill(d.via, 'platform', s.platform)}</span>
+            </span>
+            <span class="ld__stars" role="img" aria-label={fill(d.stars, 'n', s.rating)}>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span class:list={['ld__star', { 'ld__star--on': n <= s.rating }]} aria-hidden="true">
+                  <Icon name="star" size={16} />
+                </span>
+              ))}
+            </span>
+          </header>
+          <p class="ld__label">{fill(d.detected, 'lang', s.langName)}</p>
+          <p class="ld__text" lang={s.lang}>{s.text}</p>
+          {s.translation ? (
+            <div class="ld__tr">
+              <p class="ld__label">{d.translation}</p>
+              <p class="ld__text ld__text--muted">{s.translation}</p>
+            </div>
+          ) : (
+            <p class="ld__same">{d.sameLang}</p>
+          )}
+        </article>
+
+        <article class="ld__card ld__card--reply">
+          <p class="ld__label ld__label--accent">
+            <Icon name="draft" size={18} />
+            {fill(d.reply, 'lang', s.langName)}
+          </p>
+          <p class="ld__text ld__reply" lang={s.lang} aria-live="polite" data-ld-reply data-full={s.reply}>
+            {s.reply}
+          </p>
+          {s.replyTranslation && (
+            <div class="ld__tr" data-ld-after>
+              <p class="ld__label">{d.replyTranslation}</p>
+              <p class="ld__text ld__text--muted">{s.replyTranslation}</p>
+            </div>
+          )}
+          <div class="ld__actions">
+            <button type="button" class="ld__btn ld__btn--go" hidden data-ld-go>
+              {d.draft}
+            </button>
+            <button type="button" class="ld__btn ld__btn--ok" data-ld-after data-ld-ok>
+              <Icon name="check" size={18} />
+              {d.approve}
+            </button>
+            <button type="button" class="ld__btn" data-ld-after data-ld-edit>
+              {d.edit}
+            </button>
+          </div>
+          <p class="ld__copied" role="status" data-ld-copied hidden>
+            {fill(d.copied, 'platform', s.platform)}
+          </p>
+        </article>
+      </section>
+    ))
+  }
+
+  <p class="ld__human">
+    <Icon name="lock" size={18} />
+    {d.human}
+  </p>
+  <p class="ld__note">{d.venueNote}</p>
+</div>
+
+<script>
+  // ≤ 5 KB, vanilla. Progressive enhancement: without JS all panels and replies stay visible.
+  const root = document.querySelector<HTMLElement>('[data-ld]');
+  if (root) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-ld-panel]')];
+    const tablist = root.querySelector<HTMLElement>('[data-ld-tabs]');
+    let timer = 0;
+    root.classList.add('ld--js');
+    if (tablist) tablist.hidden = false;
+    panels.forEach((p, j) => {
+      p.hidden = j !== 0;
+      p.querySelector<HTMLElement>('[data-ld-go]')!.hidden = false;
+    });
+
+    const show = (p: HTMLElement, done: boolean) => {
+      p.querySelectorAll<HTMLElement>('[data-ld-after]').forEach((el) => (el.hidden = !done));
+    };
+
+    const type = (p: HTMLElement) => {
+      clearInterval(timer);
+      const el = p.querySelector<HTMLElement>('[data-ld-reply]')!;
+      const go = p.querySelector<HTMLButtonElement>('[data-ld-go]')!;
+      const full = el.dataset.full || '';
+      p.querySelector<HTMLElement>('[data-ld-copied]')!.hidden = true;
+      if (reduce) {
+        el.textContent = full;
+        show(p, true);
+        go.textContent = root.dataset.again!;
+        return;
+      }
+      show(p, false);
+      el.textContent = '';
+      el.classList.add('ld__reply--typing');
+      el.setAttribute('aria-busy', 'true');
+      go.disabled = true;
+      go.textContent = root.dataset.drafting!;
+      let i = 0;
+      timer = window.setInterval(() => {
+        i = Math.min(full.length, i + 3);
+        el.textContent = full.slice(0, i);
+        if (i >= full.length) {
+          clearInterval(timer);
+          el.classList.remove('ld__reply--typing');
+          el.removeAttribute('aria-busy');
+          go.disabled = false;
+          go.textContent = root.dataset.again!;
+          show(p, true);
+        }
+      }, 24);
+    };
+
+    const select = (i: number, focus = false) => {
+      clearInterval(timer);
+      tabs.forEach((tb, j) => {
+        const on = i === j;
+        tb.setAttribute('aria-selected', String(on));
+        tb.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((p, j) => {
+        p.hidden = i !== j;
+        if (i === j) {
+          type(p);
+        }
+      });
+      if (focus) tabs[i].focus();
+    };
+
+    tabs.forEach((tb, i) => {
+      tb.addEventListener('click', () => select(i));
+      tb.addEventListener('keydown', (e) => {
+        const k = e.key;
+        let n = -1;
+        if (k === 'ArrowRight') n = (i + 1) % tabs.length;
+        else if (k === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        else if (k === 'Home') n = 0;
+        else if (k === 'End') n = tabs.length - 1;
+        if (n >= 0) {
+          e.preventDefault();
+          select(n, true);
+        }
+      });
+    });
+
+    panels.forEach((p) => {
+      p.querySelector('[data-ld-go]')!.addEventListener('click', () => type(p));
+      p.querySelector('[data-ld-ok]')!.addEventListener('click', () => {
+        const text = p.querySelector<HTMLElement>('[data-ld-reply]')!.textContent || '';
+        const msg = p.querySelector<HTMLElement>('[data-ld-copied]')!;
+        const ok = () => (msg.hidden = false);
+        navigator.clipboard?.writeText(text).then(ok, ok) ?? ok();
+      });
+      p.querySelector('[data-ld-edit]')!.addEventListener('click', () => {
+        const el = p.querySelector<HTMLElement>('[data-ld-reply]')!;
+        el.contentEditable = 'true';
+        el.focus();
+      });
+    });
+
+    // Start typing only when the demo scrolls into view.
+    let started = false;
+    const start = () => {
+      if (!started) {
+        started = true;
+        select(0);
+      }
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          start();
+        }
+      }, { threshold: 0.35 });
+      io.observe(root);
+    } else start();
+  }
+</script>
+
+<style>
+  .ld {
+    display: grid;
+    gap: 18px;
+  }
+  .ld__top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    align-items: center;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+  }
+  .ld__badge {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 107, 0, 0.28);
+    border-radius: 999px;
+    background: var(--accent-tint);
+    color: var(--accent-soft);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+  }
+  .ld__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .ld__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ld__tab {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-2);
+    font: inherit;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ld__tab[aria-selected='true'] {
+    border-color: rgba(255, 107, 0, 0.5);
+    background: var(--accent-tint);
+    color: var(--text);
+  }
+  .ld__code {
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.04em;
+  }
+  .ld__panel {
+    display: grid;
+    gap: 14px;
+  }
+  .ld__panel[hidden] {
+    display: none;
+  }
+  @media (min-width: 860px) {
+    .ld__panel {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+  .ld__card {
+    min-width: 0;
+    padding: clamp(20px, 2.4vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+    overflow-wrap: break-word;
+  }
+  .ld__card--reply {
+    border-color: rgba(255, 107, 0, 0.35);
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.08), transparent 70%), var(--card);
+    box-shadow: var(--glow);
+  }
+  .ld__head {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .ld__avatar {
+    display: grid;
+    flex: none;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--card-2);
+    color: var(--text);
+    font-weight: 700;
+  }
+  .ld__who {
+    display: grid;
+    min-width: 0;
+  }
+  .ld__meta {
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+  }
+  .ld__stars {
+    display: inline-flex;
+    margin-left: auto;
+    color: var(--text-3);
+  }
+  .ld__star--on {
+    color: var(--accent-text);
+  }
+  .ld__star--on :global(svg) {
+    fill: currentColor;
+  }
+  .ld__label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ld__label--accent {
+    color: var(--accent-text);
+  }
+  .ld__text {
+    color: #e6e6ec;
+  }
+  .ld__text--muted {
+    color: var(--text-2);
+  }
+  .ld__tr {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line-strong);
+  }
+  .ld__same {
+    margin-top: 16px;
+    color: var(--text-3);
+    font-size: var(--fs-sm);
+  }
+  .ld__reply {
+    min-height: 6.5em;
+    border-radius: 8px;
+    outline-offset: 4px;
+  }
+  .ld__reply--typing::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: -0.15em;
+    background: var(--accent);
+    animation: ld-blink 0.9s steps(1) infinite;
+  }
+  @keyframes ld-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .ld__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .ld__btn {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    font: inherit;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .ld__btn--ok {
+    border-color: transparent;
+    background: var(--accent);
+    color: #121214;
+  }
+  .ld__btn:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .ld__btn[hidden],
+  [data-ld-after][hidden],
+  .ld__copied[hidden] {
+    display: none;
+  }
+  .ld__copied {
+    margin-top: 12px;
+    color: var(--ok);
+    font-size: var(--fs-sm);
+  }
+  .ld__human {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .ld__human :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: var(--accent-text);
+  }
+  .ld__note {
+    color: var(--text-3);
+    font-size: var(--fs-xs);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ld__reply--typing::after {
+      animation: none;
+    }
+  }
+</style>
