@@ -24,6 +24,7 @@ export type PageKey =
   | 'about'
   | 'privacy'
   | 'terms'
+  | 'data-deletion'
   | 'for/restaurants'
   | 'for/hotels';
 

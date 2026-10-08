@@ -4,11 +4,14 @@ import PageHead from './PageHead.astro';
 import { t, type Lang } from '../i18n/utils';
 interface Props {
   lang: Lang;
-  page: 'privacy' | 'terms';
+  page: 'privacy' | 'terms' | 'data-deletion';
 }
 const { lang, page } = Astro.props;
 const d = t(lang);
-const p = d.pages[page];
+const p = page === 'data-deletion' ? d.pages.dataDeletion : d.pages[page];
+type Link = { label: string; href: string };
+const linksOf = (s: object): Link[] => ('links' in s ? (s as { links: Link[] }).links : []);
+const isExternal = (h: string) => h.startsWith('http');
 ---
 
 <BaseLayout lang={lang} page={page} title={p.title} description={p.description}>
@@ -27,6 +30,13 @@ const p = d.pages[page];
             <h2>{s.h}</h2>
             {s.p.map((para) => (
               <p>{para}</p>
+            ))}
+            {linksOf(s).map((l) => (
+              <p class="legal-link">
+                <a href={l.href} {...(isExternal(l.href) ? { rel: 'noopener noreferrer', target: '_blank' } : {})}>
+                  {l.label} →
+                </a>
+              </p>
             ))}
           </section>
         ))
@@ -50,6 +60,11 @@ const p = d.pages[page];
     border: 1px solid rgba(255, 157, 61, 0.4);
     border-radius: var(--r-md);
     background: rgba(255, 107, 0, 0.08);
+  }
+  .legal-link a {
+    color: var(--accent-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .draft strong {
     color: var(--accent-soft);

@@ -1,0 +1,11 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { langPaths, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<LegalPage lang={lang} page="data-deletion" />

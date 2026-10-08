@@ -43,6 +43,7 @@ export const en = {
     legal: 'Legal',
     privacy: 'Privacy policy',
     terms: 'Terms of use',
+    dataDeletion: 'Data deletion',
     contact: 'Contact',
     studio: 'AnKo Software Labs',
     rights: '© 2026 Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs',
@@ -610,6 +611,7 @@ export const en = {
           p: [
             'You can ask us for a copy of your data, to correct it or to delete it. Write to contact@ankosoftlab.com from the e-mail address linked to your account.',
           ],
+          links: [{ label: 'How to delete your data', href: '/data-deletion/' }],
         },
         {
           h: 'Cookies',
@@ -620,6 +622,58 @@ export const en = {
         {
           h: 'Changes',
           p: ['We will publish changes to this policy on this page and notify active users by e-mail about significant changes.'],
+        },
+      ],
+    },
+
+    dataDeletion: {
+      title: 'Data deletion (draft) — TapReply',
+      description: 'How to delete your TapReply account and data, and how to revoke TapReply’s access to your Google Business Profile.',
+      h1: 'Data deletion',
+      sections: [
+        {
+          h: 'Who handles your request',
+          p: [
+            'TapReply is operated by Individual Entrepreneur Anton Kozyrev (Georgia), ID 304822565, trading as AnKo Software Labs. Contact: contact@ankosoftlab.com.',
+          ],
+        },
+        {
+          h: 'What we delete',
+          p: [
+            'Account data: your e-mail address and, if you provided them, your name and your venue’s name and city.',
+            'Content: texts of reviews you brought into TapReply (including the reviewer’s public display name, if present in the text) and the replies prepared and approved by you.',
+            'Technical data: the minimal logs we keep to make the service secure and working.',
+          ],
+        },
+        {
+          h: 'How to request deletion',
+          p: [
+            'Write to contact@ankosoftlab.com from the e-mail address linked to your account. In the message, give your venue’s name and city and say that you want your account and data deleted.',
+            'We may ask you to confirm the request from the same address before deleting anything.',
+          ],
+          links: [{ label: 'Write a deletion request', href: 'mailto:contact@ankosoftlab.com?subject=TapReply%20%E2%80%94%20data%20deletion%20request' }],
+        },
+        {
+          // TODO: подтвердить — подключение Google Business Profile ещё в подготовке; проверить формулировку, когда появится OAuth-доступ.
+          h: 'Revoke access to your Google Business Profile',
+          p: [
+            'If you connected your Google Business Profile to TapReply, you can revoke TapReply’s access at any time in your Google Account, under “Third-party apps & services”. After that, TapReply can no longer read your reviews or publish replies through Google.',
+            'Revoking access in Google does not delete the data already stored in TapReply — to delete it, send us a request as described above.',
+          ],
+          links: [{ label: 'Manage third-party access in your Google Account', href: 'https://myaccount.google.com/permissions' }],
+        },
+        {
+          h: 'When it happens',
+          p: [
+            // Срок взят из Privacy («How long we keep data»). TODO: подтвердить вместе с юристом перед коммерческим запуском.
+            'We delete your data within 30 days of your request, except where the law requires us to keep certain records (for example, invoices).',
+            'We will confirm by e-mail once the deletion is complete.',
+          ],
+        },
+        {
+          h: 'More information',
+          p: ['What data we process and why is described in the Privacy policy.'],
+          links: [{ label: 'Privacy policy', href: '/privacy/' }],
         },
       ],
     },
