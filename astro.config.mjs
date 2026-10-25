@@ -1,26 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { rename, rmdir } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 
 /**
- * Cloudflare Pages serves the nearest `404.html` walking up from the requested path.
- * With build.format 'directory', localized 404 pages land in /ru/404/index.html —
- * move them to /ru/404.html so /ru/anything-missing gets the Russian 404.
+ * Hosting: GitHub Pages (Actions). GitHub serves only the root /404.html for any
+ * missing path, so the Russian 404 stays a regular page at /ru/404/ (not auto-served).
+ * The former Cloudflare-specific `localized404` hook was removed.
  */
-const localized404 = {
-  name: 'localized-404',
-  hooks: {
-    'astro:build:done': async ({ dir }) => {
-      const root = fileURLToPath(dir);
-      for (const l of ['ru']) {
-        await rename(`${root}${l}/404/index.html`, `${root}${l}/404.html`);
-        await rmdir(`${root}${l}/404`);
-      }
-    },
-  },
-};
 
 export default defineConfig({
   site: 'https://www.tapreply.net',
@@ -36,7 +22,6 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
-    localized404,
     sitemap({
       filter: (page) => !page.includes('/404'),
       i18n: {

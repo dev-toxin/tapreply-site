@@ -272,7 +272,7 @@ export const en = {
       shield: {
         kicker: 'Tourist Shield',
         title: 'Understand the guest. Be understood by the guest.',
-        sub: 'Four clear blocks for every review: the original, a translation for you, a reply in the guest’s language and a translation of that reply — so you always know exactly what you publish.',
+        sub: 'A foreign-language review comes with up to four clear blocks: the original, a translation for you, a reply in the guest’s language and a translation of that reply. If the guest writes in your language, it’s simply the review and the reply. Either way, you know exactly what you publish.',
       },
       why: {
         kicker: 'Why TapReply',

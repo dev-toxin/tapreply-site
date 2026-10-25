@@ -50,7 +50,7 @@ let checked = 0;
 for (const file of files) {
   const rel = '/' + relative(DIST, file);
   const html = await readFile(file, 'utf8');
-  const is404 = rel.endsWith('404.html');
+  const is404 = rel.endsWith('404.html') || rel.endsWith('404/index.html');
 
   const h1 = (html.match(/<h1[\s>]/g) || []).length;
   if (h1 !== 1) errors.push(`${rel}: expected 1 <h1>, found ${h1}`);
