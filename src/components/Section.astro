@@ -1,0 +1,65 @@
+---
+interface Props {
+  id?: string;
+  kicker?: string;
+  title?: string;
+  sub?: string;
+  tone?: 'default' | 'deep' | 'light';
+  align?: 'left' | 'center';
+  class?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+const { id, kicker, title, sub, tone = 'default', align = 'left', class: cls, headingLevel = 'h2' } = Astro.props;
+const H = headingLevel;
+const headingId = id && title ? `${id}-title` : undefined;
+---
+
+<section id={id} class:list={['section', `section--${tone}`, cls]} aria-labelledby={headingId}>
+  <div class="container">
+    {
+      (kicker || title || sub) && (
+        <header class:list={['section__head', `section__head--${align}`]}>
+          {kicker && <span class="kicker">{kicker}</span>}
+          {title && <H id={headingId}>{title}</H>}
+          {sub && <p class="section__sub">{sub}</p>}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    position: relative;
+    padding-block: var(--section-y);
+  }
+  .section--deep {
+    background: var(--bg-deep);
+    border-block: 1px solid var(--line);
+  }
+  .section--light {
+    background: var(--light-bg);
+    color: var(--light-text);
+  }
+  .section--light :global(.kicker) {
+    color: var(--light-accent-text);
+  }
+  .section--light .section__sub {
+    color: var(--light-text-2);
+  }
+  .section__head {
+    max-width: 720px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+  .section__head--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section__sub {
+    margin-top: 16px;
+    color: var(--text-2);
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+  }
+</style>

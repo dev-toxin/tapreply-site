@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+# Old one-pager had only in-page anchors, so no legacy URLs need redirecting.
+# www → apex (or the reverse) is a DNS / Cloudflare rule, intentionally NOT configured here.
+
+/index.html      /            301
+/en/             /            301
+/en/*            /:splat      301
+/early-access    /pilot/      301
+/contact         /about/      301

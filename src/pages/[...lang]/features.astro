@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Icon from '../../components/Icon.astro';
+import ShieldDemo from '../../components/ShieldDemo.astro';
+import Cta from '../../components/Cta.astro';
+import { langPaths, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.features;
+---
+
+<BaseLayout lang={lang} page="features" title={p.title} description={p.description}>
+  <PageHead kicker={d.nav.features} title={p.h1} lead={p.lead}>
+    <nav class="toc" aria-label={d.common.onThisPage}>
+      {p.sections.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+    </nav>
+  </PageHead>
+
+  <div class="container feats">
+    {
+      p.sections.map((s, i) => (
+        <section id={s.id} class="feat" aria-labelledby={`${s.id}-h`}>
+          <div class="feat__head">
+            <span class="feat__icon">
+              <Icon name={s.icon} size={26} />
+            </span>
+            <h2 id={`${s.id}-h`}>{s.title}</h2>
+          </div>
+          <div class="feat__body">
+            <p class="feat__text">{s.text}</p>
+            <ul class="check-list">
+              {s.points.map((pt) => (
+                <li>{pt}</li>
+              ))}
+            </ul>
+          </div>
+          {i === 0 && (
+            <div class="feat__demo">
+              <ShieldDemo lang={lang} />
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+
+  <Cta lang={lang} title={p.cta.title} text={p.cta.text} />
+</BaseLayout>
+
+<style>
+  .toc {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  .toc a {
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.26);
+  }
+  .feats {
+    padding-bottom: var(--section-y);
+  }
+  .feat {
+    display: grid;
+    gap: 20px 48px;
+    padding-block: clamp(36px, 5vw, 64px);
+    border-top: 1px solid var(--line);
+  }
+  .feat__head {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    align-self: start;
+  }
+  .feat__head h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  }
+  .feat__icon {
+    display: grid;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border: 1px solid rgba(255, 107, 0, 0.2);
+    border-radius: 14px;
+    background: var(--accent-tint);
+    color: var(--accent-text);
+  }
+  .feat__text {
+    margin-bottom: 20px;
+    color: var(--text-2);
+    font-size: var(--fs-lead);
+  }
+  .feat__demo {
+    margin-top: 12px;
+  }
+  @media (min-width: 960px) {
+    .feat {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+    .feat__demo {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

@@ -1,0 +1,11 @@
+---
+import SegmentPage from '../../../components/SegmentPage.astro';
+import { langPaths, type Lang } from '../../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<SegmentPage lang={lang} segment="restaurants" />

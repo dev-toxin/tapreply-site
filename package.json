@@ -1,0 +1,21 @@
+{
+  "name": "tapreply-site",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Marketing site for TapReply — AI review replies for hospitality",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:links": "node scripts/check-links.mjs",
+    "test": "npm run build && npm run check:links"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "@astrojs/sitemap": "^3.7.4"
+  }
+}

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Platforms from '../../components/Platforms.astro';
+import Cta from '../../components/Cta.astro';
+import { langPaths, t, type Lang } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+const { lang } = Astro.props as { lang: Lang };
+const d = t(lang);
+const p = d.pages.how;
+---
+
+<BaseLayout lang={lang} page="how-it-works" title={p.title} description={p.description}>
+  <PageHead kicker={d.nav.how} title={p.h1} lead={p.lead} />
+
+  <section class="container steps" aria-label={d.nav.how}>
+    <ol class="timeline">
+      {
+        p.steps.map((s, i) => (
+          <li class="timeline__item">
+            <span class="timeline__num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <div>
+              <h2>{s.title}</h2>
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section id="platforms" class="container table-sec" aria-labelledby="platforms-h">
+    <h2 id="platforms-h">{p.tableTitle}</h2>
+    <p class="lead table-sec__intro">{p.tableIntro}</p>
+    <Platforms lang={lang} variant="table" />
+    <p class="honesty">{p.honesty}</p>
+  </section>
+
+  <Cta lang={lang} title={p.cta.title} text={p.cta.text} />
+</BaseLayout>
+
+<style>
+  .steps {
+    padding-bottom: clamp(48px, 7vw, 88px);
+  }
+  .timeline {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    max-width: 860px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--card);
+  }
+  .timeline__item:last-child {
+    border-color: rgba(255, 107, 0, 0.35);
+  }
+  .timeline__num {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--accent-tint);
+    color: var(--accent-text);
+    font-weight: 700;
+  }
+  .timeline h2 {
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .timeline p {
+    margin-top: 6px;
+    color: var(--text-2);
+  }
+  .table-sec {
+    padding-bottom: var(--section-y);
+  }
+  .table-sec h2 {
+    font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  }
+  .table-sec__intro {
+    margin: 12px 0 28px;
+    max-width: 62ch;
+  }
+  .honesty {
+    max-width: 70ch;
+    margin-top: 16px;
+    padding: 18px 20px;
+    border-left: 2px solid var(--accent);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    background: var(--card);
+    color: var(--text-2);
+  }
+</style>
