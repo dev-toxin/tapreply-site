@@ -11,7 +11,9 @@ export const en = {
     menu: 'Menu',
     langSwitch: 'Change language',
     homeLabel: 'TapReply — home',
-    ctaPilot: 'Become a pilot',
+    ctaPilot: 'Apply for the pilot',
+    orEmail: 'Or just email',
+    orEmailTail: '— a two-line message is enough.',
     ctaHow: 'How it works',
     example: 'Example',
     earlyAccess: 'Early access · pilot program',
@@ -80,7 +82,7 @@ export const en = {
         rating: 5,
         text: 'Best khinkali we had in Tbilisi! The staff showed us how to eat them properly and recommended a great Saperavi. Cozy place — a bit hard to find from the street, though.',
         translation: '',
-        reply: 'Thank you so much, Emily! We\'re glad our team turned your first khinkali into a proper lesson — and that the Saperavi was a good match. You\'re right about the entrance, we\'ll make it easier to spot from the street. Come back any time!',
+        reply: 'Thank you so much, Emily! We\'re glad our team turned your first khinkali into a proper lesson — and that the Saperavi was a good match. Thanks for the tip about the entrance — we\'ll take it into account. Come back any time!',
         replyTranslation: '',
       },
       {
@@ -104,8 +106,8 @@ export const en = {
         rating: 3,
         text: 'Yemekler güzeldi ama garson siparişimizi iki kez karıştırdı. Hesaptaki fiyatlar da menüdekinden biraz farklıydı. Hesabı kontrol etmenizi öneririm.',
         translation: 'The food was good, but the waiter mixed up our order twice. The prices on the bill were also a bit different from the menu. I recommend checking your bill.',
-        reply: 'Değerli yorumunuz için teşekkür ederiz, Mehmet Bey. Siparişinizdeki karışıklık için özür dileriz. Hesaptaki fiyat farkını ekibimizle hemen kontrol ediyoruz. Bir dahaki ziyaretinizde sizi daha iyi ağırlamak isteriz.',
-        replyTranslation: 'Thank you for your valuable review, Mr. Mehmet. We apologise for the mix-up with your order. We\'re checking the price difference on the bill with our team right away. We\'d like to host you better on your next visit.',
+        reply: 'Değerli yorumunuz için teşekkür ederiz, Mehmet Bey. Siparişinizdeki karışıklık için özür dileriz. Hesaptaki fiyat farkıyla ilgili notunuzu ekibimize ileteceğiz. Bir dahaki ziyaretinizde sizi daha iyi ağırlamak isteriz.',
+        replyTranslation: 'Thank you for your valuable review, Mr. Mehmet. We apologise for the mix-up with your order. We\'ll pass your note about the price difference on the bill on to our team. We hope to make your next visit a better one.',
       },
       {
         id: 'ru',
@@ -150,13 +152,13 @@ export const en = {
         key: 'reply',
         label: 'Reply to the guest',
         lang: 'German',
-        text: 'Vielen Dank für Ihren Besuch und die lieben Worte über unsere Chinkali! Es tut uns leid, dass Sie so lange warten mussten – wir haben das bereits mit unserem Küchenteam besprochen. Wir freuen uns, Sie bald wieder bei uns zu begrüßen!',
+        text: 'Vielen Dank für Ihren Besuch und die lieben Worte über unsere Chinkali! Es tut uns leid, dass Sie so lange warten mussten – das geben wir an unser Küchenteam weiter. Wir freuen uns, Sie bald wieder bei uns zu begrüßen!',
       },
       {
         key: 'replyTranslation',
         label: 'Your reply, translated for you',
         lang: 'English',
-        text: 'Thank you for visiting and for the kind words about our khinkali! We’re sorry you had to wait so long — we have already discussed it with our kitchen team. We look forward to welcoming you back soon!',
+        text: 'Thank you for visiting and for the kind words about our khinkali! We’re sorry you had to wait so long — we’ll pass this on to our kitchen team. We look forward to welcoming you back soon!',
       },
     ],
   },
@@ -164,7 +166,7 @@ export const en = {
   platforms: {
     legend: {
       api: 'Official API (in preparation)',
-      email: 'Notification e-mail forwarding',
+      email: 'Notification email forwarding',
       manual: 'Paste or share the review',
     },
     cols: {
@@ -177,42 +179,42 @@ export const en = {
       {
         name: 'Google',
         methods: ['api', 'email', 'manual'],
-        in: 'Official Google Business Profile API — in preparation. Until then: notification e-mails or paste.',
+        in: 'Official Google Business Profile API — in preparation. Until then: notification emails or paste.',
         out: 'Copy the approved reply into Google Business Profile. Direct publishing will follow the official API.',
         note: 'Google is the only platform where we plan an API connection first.',
       },
       {
         name: 'Yandex Maps',
         methods: ['email', 'manual'],
-        in: 'Forward notification e-mails or paste the review.',
+        in: 'Forward notification emails or paste the review.',
         out: 'Copy the approved reply into Yandex Business.',
         note: 'Replies are expected in Russian — TapReply drafts them in Russian, with a translation for you.',
       },
       {
         name: '2GIS',
         methods: ['email', 'manual'],
-        in: 'Forward notification e-mails or paste the review.',
+        in: 'Forward notification emails or paste the review.',
         out: 'Copy the approved reply into your 2GIS business account.',
         note: '',
       },
       {
         name: 'Tripadvisor',
         methods: ['email', 'manual'],
-        in: 'Forward notification e-mails or paste the review.',
+        in: 'Forward notification emails or paste the review.',
         out: 'Copy the approved reply into the Tripadvisor management center.',
         note: '',
       },
       {
         name: 'Booking.com',
         methods: ['email', 'manual'],
-        in: 'Forward notification e-mails or paste the review.',
+        in: 'Forward notification emails or paste the review.',
         out: 'Copy the approved reply into the Booking.com extranet.',
         note: '',
       },
       {
         name: 'TheFork',
         methods: ['email', 'manual'],
-        in: 'Forward notification e-mails or paste the review.',
+        in: 'Forward notification emails or paste the review.',
         out: 'Copy the approved reply into TheFork Manager.',
         note: '',
       },
@@ -232,7 +234,7 @@ export const en = {
       },
     ],
     noPasswords:
-      'TapReply never asks for your passwords to Google, Yandex, Booking or any other platform, and never logs in on your behalf.',
+      'TapReply never asks for your passwords to Google, Yandex, Booking.com or any other platform, and never logs in on your behalf.',
   },
 
   pages: {
@@ -242,13 +244,13 @@ export const en = {
         'AI review replies for cafés, restaurants, bars and small hotels. All platforms in one feed, a draft in the guest’s language in seconds, a translation for you. Early access.',
       hero: {
         h1: 'Reply to every review — in your guest’s language.',
-        sub: 'Google, Yandex Maps, 2GIS, Tripadvisor, Booking and more in one feed. TapReply drafts a reply in the guest’s language and translates everything for you — about 10 seconds per review, right from your phone.',
+        sub: 'Google, Yandex Maps, 2GIS, Tripadvisor, Booking.com and more in one feed. TapReply drafts a reply in the guest’s language and translates everything for you. A ready draft in seconds — you just check it, right from your phone.',
         note: 'No passwords to your review platforms. You approve every reply.',
       },
       platforms: {
         kicker: 'Platforms',
-        title: 'Where your guests write — honestly explained.',
-        sub: 'We connect Google through its official API (in preparation). Everything else works through notification e-mails or a simple paste — and you publish the reply yourself.',
+        title: 'Where your guests leave reviews — and how each one connects.',
+        sub: 'We connect Google through its official API (in preparation). Everything else works through notification emails or a simple paste — and you publish the reply yourself.',
         more: 'See connection details',
       },
       how: {
@@ -257,7 +259,7 @@ export const en = {
         steps: [
           {
             title: 'Bring in your reviews',
-            text: 'Forward notification e-mails or paste a review. Google via the official API is in preparation.',
+            text: 'Forward notification emails or paste a review. Google via the official API is in preparation.',
           },
           {
             title: 'Get a draft in the guest’s language',
@@ -271,7 +273,7 @@ export const en = {
       },
       shield: {
         kicker: 'Tourist Shield',
-        title: 'Understand the guest. Be understood by the guest.',
+        title: 'Understand every guest. Reply so they understand you.',
         sub: 'A foreign-language review comes with up to four clear blocks: the original, a translation for you, a reply in the guest’s language and a translation of that reply. If the guest writes in your language, it’s simply the review and the reply. Either way, you know exactly what you publish.',
       },
       why: {
@@ -315,10 +317,10 @@ export const en = {
         title: 'Built so you never hand over the keys.',
         text: 'Your review platforms stay under your own logins. TapReply never asks for them — by design.',
         points: [
-          'No passwords or logins to Google, Yandex, Booking or other platforms.',
+          'No passwords or logins to Google, Yandex, Booking.com or other platforms.',
           'Only review texts and your replies are processed — no guest payment data.',
           'Every reply is approved by a person before it goes anywhere.',
-          'Delete your data at any time with one e-mail.',
+          'Delete your data at any time with one email.',
         ],
       },
       pricing: {
@@ -348,7 +350,7 @@ export const en = {
       },
       cta: {
         title: 'Looking for 3–10 pilot venues.',
-        text: 'Cafés, restaurants, bars and small hotels with guests from abroad. Pilot venues shape the product and get preferential early pricing.',
+        text: 'Cafés, restaurants, bars and small hotels with guests from abroad. Pilot venues shape the product and get early-adopter pricing.',
         secondary: 'Write to the founder',
       },
     },
@@ -358,7 +360,7 @@ export const en = {
       description:
         'Tourist Shield translation, one review feed for all platforms, replies in the guest’s language, your venue’s tone, a phone app without the App Store, and no platform passwords.',
       h1: 'Everything you need to answer guests well — nothing you don’t.',
-      lead: 'TapReply is a calm tool for one job: answering reviews quickly and correctly in any language, from your phone.',
+      lead: 'TapReply is a focused tool for one job: answering reviews quickly and correctly in any language, from your phone.',
       sections: [
         {
           id: 'tourist-shield',
@@ -389,14 +391,14 @@ export const en = {
           id: 'tone',
           icon: 'tone',
           title: 'Your venue’s tone',
-          text: 'Describe your place once — family café, wine bar, guest house — and choose the tone. Drafts thank for specific dishes, apologise for specific problems and never sound like a template.',
+          text: 'Describe your place once — family café, wine bar, guest house — and choose the tone. Drafts thank guests for specific dishes, apologise for specific problems and never sound like a template.',
           points: ['Warm, formal or relaxed tone', 'Signature with your name or the venue’s', 'Careful handling of negative reviews: no arguing with guests'],
         },
         {
           id: 'pwa',
           icon: 'phone',
           title: 'On your phone, like an app',
-          text: 'TapReply works in any modern browser and installs on the home screen of your iPhone or Android phone. No App Store, no updates to install — about 10 seconds per review.',
+          text: 'TapReply works in any modern browser and installs on the home screen of your iPhone or Android phone. No App Store, no updates to install. A ready draft in seconds — you just check it.',
           points: ['iPhone (Safari) and Android (Chrome)', 'Large buttons, one-thumb flow', 'Works on a laptop as well'],
         },
         {
@@ -416,8 +418,8 @@ export const en = {
     how: {
       title: 'How it works — TapReply',
       description:
-        'Step-by-step: how reviews get into TapReply, how a reply in the guest’s language is prepared, and an honest table of platforms and connection methods.',
-      h1: 'From a new review to a published reply in about 10 seconds.',
+        'Step-by-step: how reviews get into TapReply, how a reply in the guest’s language is prepared, and a clear table of platforms and connection methods.',
+      h1: 'From a new review to a ready reply in seconds.',
       lead: 'Here is exactly what happens — including what is automated today and what you still do yourself.',
       steps: [
         {
@@ -426,7 +428,7 @@ export const en = {
         },
         {
           title: 'The review appears in TapReply',
-          text: 'Forward the platform’s notification e-mails to your personal TapReply address, or paste / share the review text from your phone. Google via the official API is in preparation.',
+          text: 'Forward the platform’s notification emails to your personal TapReply address, or paste / share the review text from your phone. Google via the official API is in preparation.',
         },
         {
           title: 'TapReply prepares a draft',
@@ -470,10 +472,10 @@ export const en = {
         {
           name: 'Early access',
           price: 'Pricing at launch',
-          period: 'pricing announced at launch',
+          period: '',
           desc: 'For one café, restaurant, bar or guest house.',
-          features: ['1 venue', 'AI replies for your normal review volume', 'Tourist Shield and venue tone', 'Notification e-mail forwarding', 'Personal onboarding during the pilot'],
-          cta: 'Become a pilot',
+          features: ['1 venue', 'AI replies for your usual review volume', 'Tourist Shield and venue tone', 'Notification email forwarding', 'Personal onboarding during the pilot'],
+          cta: 'Apply for the pilot',
           highlight: true,
         },
       ],
@@ -494,7 +496,7 @@ export const en = {
         },
         {
           q: 'Can I cancel?',
-          a: 'Yes, at any time — just tell us by e-mail. No long-term contracts in the pilot.',
+          a: 'Yes, at any time — just tell us by email. No long-term contracts in the pilot.',
         },
       ],
     },
@@ -502,7 +504,7 @@ export const en = {
     pilot: {
       title: 'Pilot program — TapReply',
       description:
-        'We are looking for 3–10 cafés, restaurants, bars and small hotels with guests from abroad to pilot TapReply. Personal onboarding and preferential early pricing.',
+        'We are looking for 3–10 cafés, restaurants, bars and small hotels with guests from abroad to pilot TapReply. Personal onboarding and early-adopter pricing.',
       h1: 'Become one of our first 3–10 pilot venues.',
       lead: 'We are building TapReply together with the people who use it every day. Pilot venues get the product early, personal help and a voice in what we build next.',
       who: {
@@ -519,7 +521,7 @@ export const en = {
         items: [
           'Early access to TapReply for your venue',
           'Personal onboarding: we set up your platforms and tone together',
-          'Preferential early pricing, agreed individually',
+          'Early-adopter pricing, agreed individually',
           'A direct line to the founder',
         ],
       },
@@ -528,12 +530,12 @@ export const en = {
         items: [
           'Use TapReply for your real reviews for 4–8 weeks',
           'Short feedback: a message or a 20-minute call every couple of weeks',
-          'Tell us honestly what doesn’t work',
+          'Tell us plainly what doesn’t work',
         ],
       },
       form: {
         title: 'Request a pilot spot',
-        intro: 'Fill in the form — it opens your e-mail app with a ready message. Nothing is sent until you press “Send” there.',
+        intro: 'Fill in the form — it opens your email app with a ready message. Nothing is sent until you press “Send” there.',
         name: 'Your name',
         venue: 'Venue name',
         city: 'City and country',
@@ -541,10 +543,10 @@ export const en = {
         typeOptions: ['Café', 'Restaurant', 'Bar', 'Guest house', 'Small hotel', 'Other'],
         platforms: 'Where do guests leave reviews?',
         languages: 'Guest languages you see most often',
-        email: 'Your e-mail',
+        email: 'Your email',
         message: 'Anything else? (optional)',
-        submit: 'Prepare e-mail',
-        fallback: 'Prefer to write yourself?',
+        submit: 'Open email draft',
+        fallback: 'Or just email',
         subject: 'TapReply pilot request',
         privacy: 'We use these details only to reply to your request.',
       },
@@ -558,12 +560,16 @@ export const en = {
       lead: 'Didn’t find your question? Write to us — we reply personally.',
       items: [
         {
-          q: 'Do I need to give you my Google, Yandex or Booking password?',
-          a: 'No. TapReply never asks for passwords to review platforms and never logs in on your behalf. Reviews arrive through notification e-mails, paste/share or — for Google — the official API (in preparation).',
+          q: 'Do I need to give you my Google, Yandex or Booking.com password?',
+          a: 'No. TapReply never asks for passwords to review platforms and never logs in on your behalf. Reviews arrive through notification emails, paste/share or — for Google — the official API (in preparation).',
         },
         {
           q: 'Does the AI publish replies by itself?',
           a: 'No. AI only prepares a draft. You read it (with a translation), edit if you want and publish it yourself.',
+        },
+        {
+          q: 'Can the AI promise something on my behalf?',
+          a: 'It only drafts — you decide. Before copying, remove any promise you don’t plan to keep. AI can make mistakes, so every reply goes through you.',
         },
         {
           q: 'Which languages are supported?',
@@ -571,7 +577,7 @@ export const en = {
         },
         {
           q: 'What about Yandex Maps?',
-          a: 'Yandex Maps reviews come in via notification e-mails or paste. Replies there are expected in Russian, so TapReply drafts them in Russian — with a translation for you if you need it.',
+          a: 'Yandex Maps reviews come in via notification emails or paste. Replies there are expected in Russian, so TapReply drafts them in Russian — with a translation for you if you need it.',
         },
         {
           q: 'Which platforms are supported?',
@@ -592,6 +598,10 @@ export const en = {
         {
           q: 'What happens to review texts and my replies?',
           a: 'They are processed only to translate and prepare replies for you. We do not sell data or use it for advertising. You can ask us to delete your data at any time.',
+        },
+        {
+          q: 'Where is my data?',
+          a: 'Hosting and the database are located in the EU. The AI provider processes review texts only to prepare translations and reply drafts. We don’t sell data.',
         },
         {
           q: 'Who sees the translations?',
@@ -620,7 +630,7 @@ export const en = {
       title: 'About — TapReply by AnKo Software Labs',
       description:
         'TapReply is built by AnKo Software Labs, a small independent software studio in Georgia. Contacts and how we work.',
-      h1: 'A small studio building a calm tool for hospitality.',
+      h1: 'A small studio building a focused tool for hospitality.',
       lead: 'TapReply is made by AnKo Software Labs — an independent software studio run by an individual entrepreneur in Georgia.',
       paragraphs: [
         'We see the same thing in cafés and guest houses from Tbilisi to Almaty and Valencia: owners care about their guests, but answering reviews in five languages from a phone between orders is hard. So reviews stay unanswered — and future guests notice.',
@@ -633,8 +643,9 @@ export const en = {
         { label: 'Stage', value: 'Early access, pilot program' },
         { label: 'First markets', value: 'Georgia, Kazakhstan; then Spain and Latin America' },
       ],
+      founder: 'Founded by Anton Kozyrev',
       contactTitle: 'Contact',
-      contactText: 'The fastest way to reach us is e-mail. We reply personally.',
+      contactText: 'The fastest way to reach us is email. We reply personally.',
       studioLink: 'Studio website',
     },
 
@@ -652,7 +663,7 @@ export const en = {
         {
           h: 'What data we process',
           p: [
-            'Account data: your e-mail address and, if you provide them, your name and your venue’s name and city.',
+            'Account data: your email address and, if you provide them, your name and your venue’s name and city.',
             'Content: texts of reviews you bring into TapReply (including the reviewer’s public display name, if present in the text) and the replies prepared and approved by you.',
             'Technical data: minimal logs needed to keep the service secure and working (for example, time of request and error codes).',
             'This website itself does not use tracking cookies or third-party analytics.',
@@ -682,7 +693,7 @@ export const en = {
         {
           h: 'Your rights',
           p: [
-            'You can ask us for a copy of your data, to correct it or to delete it. Write to contact@ankosoftlab.com from the e-mail address linked to your account.',
+            'You can ask us for a copy of your data, to correct it or to delete it. Write to contact@ankosoftlab.com from the email address linked to your account.',
           ],
           links: [{ label: 'How to delete your data', href: '/data-deletion/' }],
         },
@@ -694,7 +705,7 @@ export const en = {
         },
         {
           h: 'Changes',
-          p: ['We will publish changes to this policy on this page and notify active users by e-mail about significant changes.'],
+          p: ['We will publish changes to this policy on this page and notify active users by email about significant changes.'],
         },
       ],
     },
@@ -713,7 +724,7 @@ export const en = {
         {
           h: 'What we delete',
           p: [
-            'Account data: your e-mail address and, if you provided them, your name and your venue’s name and city.',
+            'Account data: your email address and, if you provided them, your name and your venue’s name and city.',
             'Content: texts of reviews you brought into TapReply (including the reviewer’s public display name, if present in the text) and the replies prepared and approved by you.',
             'Technical data: the minimal logs we keep to make the service secure and working.',
           ],
@@ -721,7 +732,7 @@ export const en = {
         {
           h: 'How to request deletion',
           p: [
-            'Write to contact@ankosoftlab.com from the e-mail address linked to your account. In the message, give your venue’s name and city and say that you want your account and data deleted.',
+            'Write to contact@ankosoftlab.com from the email address linked to your account. In the message, give your venue’s name and city and say that you want your account and data deleted.',
             'We may ask you to confirm the request from the same address before deleting anything.',
           ],
           links: [{ label: 'Write a deletion request', href: 'mailto:contact@ankosoftlab.com?subject=TapReply%20%E2%80%94%20data%20deletion%20request' }],
@@ -740,7 +751,7 @@ export const en = {
           p: [
             // Срок взят из Privacy («How long we keep data»). TODO: подтвердить вместе с юристом перед коммерческим запуском.
             'We delete your data within 30 days of your request, except where the law requires us to keep certain records (for example, invoices).',
-            'We will confirm by e-mail once the deletion is complete.',
+            'We will confirm by email once the deletion is complete.',
           ],
         },
         {
@@ -824,14 +835,14 @@ export const en = {
         how: [
           {
             title: 'One feed for the floor',
-            text: 'New and negative reviews from every platform in one list on your phone. Google via the official API is in preparation; others via notification e-mails or paste.',
+            text: 'New and negative reviews from every platform in one list on your phone. Google via the official API is in preparation; others via notification emails or paste.',
           },
           {
             title: 'Tourist Shield',
             text: 'The review translated for you, a reply in the guest’s language, and a translation of that reply — so you know exactly what you publish.',
           },
           {
-            title: 'Ten seconds, one thumb',
+            title: 'A draft in seconds, one thumb',
             text: 'The draft mentions the dish or the waiter the guest wrote about. You approve, copy and paste — nothing goes out without you.',
           },
         ],
@@ -865,8 +876,8 @@ export const en = {
         ],
         how: [
           {
-            title: 'Booking, Tripadvisor, Google in one place',
-            text: 'Forward notification e-mails or paste the review. Google via the official API is in preparation. We never ask for your extranet password.',
+            title: 'Booking.com, Tripadvisor, Google in one place',
+            text: 'Forward notification emails or paste the review. Google via the official API is in preparation. We never ask for your extranet password.',
           },
           {
             title: 'A personal reply, point by point',
@@ -879,10 +890,10 @@ export const en = {
         ],
         example: {
           platform: 'Typical mix for a guest house: Booking.com, Tripadvisor, Google.',
-          note: 'Booking.com and Tripadvisor reviews come in via notification e-mails or paste; you publish the reply in their business accounts.',
+          note: 'Booking.com and Tripadvisor reviews come in via notification emails or paste; you publish the reply in their business accounts.',
         },
         ctaTitle: 'Host guests from many countries?',
-        ctaText: 'Become a pilot venue — personal onboarding and preferential early pricing.',
+        ctaText: 'Apply to become a pilot venue — personal onboarding and early-adopter pricing.',
       },
     },
 

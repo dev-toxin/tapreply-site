@@ -49,7 +49,7 @@ const fallbackHref = mailto(f.subject);
         <h2 id="apply-h">{f.title}</h2>
         <p>{f.intro}</p>
         <p class="apply__fallback">
-          {f.fallback} <a href={fallbackHref}>{CONTACT_EMAIL}</a>
+          {f.fallback} <a href={fallbackHref}>{CONTACT_EMAIL}</a> {d.common.orEmailTail}
         </p>
       </div>
 

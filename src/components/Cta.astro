@@ -1,6 +1,6 @@
 ---
 import Button from './Button.astro';
-import { href, mailto, t, type Lang } from '../i18n/utils';
+import { CONTACT_EMAIL, href, mailto, t, type Lang } from '../i18n/utils';
 interface Props {
   lang: Lang;
   title: string;
@@ -23,11 +23,25 @@ const d = t(lang);
         <Button href={href(lang, 'pilot')} size="lg" arrow>{d.common.ctaPilot}</Button>
         <Button href={mailto('TapReply')} size="lg" variant="secondary">{d.pages.home.cta.secondary}</Button>
       </div>
+      <p class="cta__email">
+        {d.common.orEmail} <a href={mailto('TapReply')}>{CONTACT_EMAIL}</a> {d.common.orEmailTail}
+      </p>
     </div>
   </div>
 </section>
 
 <style>
+  .cta__email {
+    position: relative;
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.95rem;
+  }
+  .cta__email a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .cta-wrap {
     padding-block: 0 var(--section-y);
   }

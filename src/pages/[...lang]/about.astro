@@ -35,6 +35,7 @@ const p = d.pages.about;
 
       <div class="contact">
         <h2>{p.contactTitle}</h2>
+        <p class="contact__founder">{p.founder}</p>
         <p>{p.contactText}</p>
         <a class="contact__mail" href={`mailto:${CONTACT_EMAIL}`}>
           <Icon name="mail" size={20} />
@@ -105,6 +106,11 @@ const p = d.pages.about;
     margin: 8px 0 16px;
     color: var(--text-2);
     font-size: var(--fs-sm);
+  }
+  .contact p.contact__founder {
+    margin: 8px 0 0;
+    color: var(--text);
+    font-weight: 600;
   }
   .contact__mail {
     display: flex;
