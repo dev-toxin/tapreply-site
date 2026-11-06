@@ -82,3 +82,7 @@
 ## 2026-10-07 · Тарифы: две карточки и контактный адрес
 - Карточки: «Free» и «Early access — pricing announced at launch». Multi и Chain убраны; для сетей — одна строка «Chains and groups — contact us» со ссылкой mailto.
 - Публичный адрес — `contact@ankosoftlab.com` (`CONTACT_EMAIL`). `ceo@` — логин бизнес-аккаунта Google, на сайте не публикуется.
+
+## 2026-11-06 · CSP через `<meta>` (GitHub Pages)
+- GitHub Pages не читает `public/_headers`, поэтому CSP продублирована в `BaseLayout.astro` как `<meta http-equiv="Content-Security-Policy">` — та же политика, что в `_headers`: `script-src 'self'; style-src 'self'`, без `unsafe-inline`.
+- В `<meta>` нельзя задать `frame-ancestors`, а X-Frame-Options, HSTS, COOP, Permissions-Policy вообще не передаются через `<meta>` — на GitHub Pages их нет. Добавлен только `<meta name="referrer">`. `_headers` остаётся для возможного Cloudflare.
